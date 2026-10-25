@@ -170,22 +170,19 @@ const projectCodeSnippets: Record<string, { filename: string; lines: { num: stri
                     </svg>
                   </a>
 
-                  <button
-                    type="button"
-                    class="btn-card-action btn-card-action--secondary btn-project-architecture"
+                  <a
+                    href="#contact"
+                    class="btn-card-action btn-card-action--secondary btn-trigger-project-inquiry"
                     data-project-id={project.id}
                     data-project-title={project.title}
-                    data-project-category={project.category}
-                    data-project-snippet={snippet.filename}
-                    title="Open architectural specifications for this system"
+                    data-cursor-hover
+                    title={`Inquire about ${project.title}`}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                      <polyline points="2 17 12 22 22 17"></polyline>
-                      <polyline points="2 12 12 17 22 12"></polyline>
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                     </svg>
-                    <span>Discuss Architecture</span>
-                  </button>
+                    <span>Inquire About Project</span>
+                  </a>
                 </div>
               </div>
             </article>

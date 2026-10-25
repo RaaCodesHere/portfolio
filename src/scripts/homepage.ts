@@ -356,12 +356,35 @@ if (typeof document !== 'undefined') {
     archDialog.showModal();
   }
 
-  // Bind all Discuss Architecture triggers
-  document.querySelectorAll('.btn-trigger-architecture, .btn-project-architecture').forEach((btn) => {
+  // Bind "Inquire About Project" triggers from ProjectIndex
+  document.querySelectorAll('.btn-trigger-project-inquiry').forEach((btn) => {
     btn.addEventListener('click', (e: Event) => {
       e.preventDefault();
-      const projId = (btn as HTMLElement).getAttribute('data-project-id') || undefined;
-      openArchitectureModal(projId);
+      const projectTitle = (btn as HTMLElement).getAttribute('data-project-title') || 'Selected Project';
+
+      const banner = document.getElementById('arch-context-banner');
+      const bannerName = document.getElementById('arch-context-name');
+      if (banner && bannerName) {
+        bannerName.textContent = projectTitle;
+        banner.style.display = 'flex';
+      }
+
+      const msgInput = document.getElementById('form-message') as HTMLTextAreaElement | null;
+      if (msgInput) {
+        msgInput.value = `Hi Samyog,\n\nI'm interested in building a project similar to "${projectTitle}".\n\nHere are some details on what we need:\n- Project description:\n- Preferred timeline:\n\nLooking forward to hearing from you!`;
+      }
+
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        const headerOffset = 80;
+        const elPos = contactSection.getBoundingClientRect().top;
+        const targetPos = elPos + window.scrollY - headerOffset;
+        window.scrollTo({ top: targetPos, behavior: 'smooth' });
+
+        setTimeout(() => {
+          msgInput?.focus();
+        }, 600);
+      }
     });
   });
 
@@ -379,7 +402,7 @@ if (typeof document !== 'undefined') {
     }
   });
 
-  // "Inquire About This Architecture" inside modal
+  // "Inquire About This Project" inside modal
   const btnInquireWithSpec = document.getElementById('btn-inquire-with-spec');
   btnInquireWithSpec?.addEventListener('click', () => {
     if (!currentActiveSpec) return;
@@ -393,21 +416,10 @@ if (typeof document !== 'undefined') {
       banner.style.display = 'flex';
     }
 
-    // Set chip
-    const typeChips = document.querySelectorAll('.type-chip');
-    typeChips.forEach((chip) => {
-      const isMatch = chip.getAttribute('data-type') === currentActiveSpec?.systemType;
-      chip.classList.toggle('is-active', isMatch);
-    });
-    const hiddenType = document.getElementById('form-system-type') as HTMLInputElement | null;
-    if (hiddenType && currentActiveSpec) {
-      hiddenType.value = currentActiveSpec.systemType;
-    }
-
-    // Pre-populate message
+    // Pre-populate message without jargon
     const msgInput = document.getElementById('form-message') as HTMLTextAreaElement | null;
     if (msgInput) {
-      msgInput.value = `Hi Samyog,\n\nI would like to consult on the architecture and implementation of "${currentActiveSpec.title}".\n\nSpecific requirements:\n- Target Concurrency / Throughput:\n- Integration Scope (APIs / Webhooks / POS):\n- Deployment Timeline:\n\nLooking forward to discussing the technical specification!`;
+      msgInput.value = `Hi Samyog,\n\nI'm interested in building a project similar to "${currentActiveSpec.title}".\n\nHere are some details on what we need:\n- Project description:\n- Preferred timeline:\n\nLooking forward to hearing from you!`;
     }
 
     // Smooth scroll to contact

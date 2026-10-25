@@ -58,12 +58,12 @@ export interface PortfolioData {
 
 export const defaultPortfolioData: PortfolioData = {
   hero: {
-    badge: 'SENIOR PYTHON BACKEND ARCHITECT & AUTOMATION SPECIALIST',
-    titleLine1: 'High-Throughput Microservices,',
-    titleLine2: 'vendor POS bridges &',
-    titleAccent: 'Autonomous Pipelines',
+    badge: 'PYTHON DEVELOPER & AUTOMATION SPECIALIST',
+    titleLine1: 'Scalable Backends &',
+    titleLine2: '',
+    titleAccent: 'Automation Systems',
     subtitle:
-      '5+ years architecting fault-tolerant Python backends, retail POS integration bridges, stealth data extraction clusters, and high-concurrency automation systems with 99.9% uptime.',
+      '5+ years building fast, reliable Python backends, automation bots, and data pipelines with 99.9% uptime.',
     stats: [
       { number: '5+ Yrs', label: 'Python Systems' },
       { number: '170+', label: 'Deployments Delivered' },
@@ -91,13 +91,13 @@ async def sync_pos_transaction(payload: dict, x_signature: str = Header()):
     liveLog: 'FastAPI Gateway nominal | Celery queue active | P99 Latency: 22ms',
   },
   about: {
-    sectionTitle: 'Python Systems Architect & Automation Specialist',
+    sectionTitle: 'Python Developer & Automation Specialist',
     sectionSubtitle:
-      '5+ years architecting resilient Python backends, high-throughput commercial vendor bridges, and autonomous intelligence systems.',
+      '5+ years building reliable backends, store integrations, and custom automation tools.',
     bioParagraphs: [
-      "I am Samyog Dhakal (RaaSki), a Python systems developer with over 5 years of focused engineering experience in asynchronous backend architecture, commercial retail integrations, and distributed automation pipelines.",
-      "Over the past half-decade, I have architected and deployed over 170 robust systems for clients across e-commerce, commercial retail, cybersecurity, and community infrastructure. My work centers on high-throughput microservices, sub-second POS inventory synchronization between physical store registers and online channels, and anti-abuse security engines.",
-      "I take pride in writing fault-tolerant, clean Python code that operates 24/7 without intervention—handling concurrency spikes, HMAC signature validations, and distributed task retries quietly in the background.",
+      "I am Samyog Dhakal (RaaSki), a Python developer with over 5 years of experience building reliable backends, custom automations, and data pipelines.",
+      "Over the past five years, I have deployed over 170 projects for clients in e-commerce, community management, and web automation. My focus is writing clean, dependable Python code that runs 24/7 without issues.",
+      "Whether you need custom bots, store and payment integrations, or high-volume web scrapers, I build systems designed to perform smoothly under heavy workloads.",
     ],
     skillCategories: [
       {
