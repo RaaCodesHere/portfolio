@@ -1,0 +1,30 @@
+---
+/* RaaSki — homepage (/).
+   Assembles all sections: hero, about, project gallery, vendor solutions,
+   contact form, and footer. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import AboutPreview from '../components/AboutPreview.astro';
+import ProjectIndex from '../components/ProjectIndex.astro';
+import VendorSolutions from '../components/VendorSolutions.astro';
+import ContactSection from '../components/ContactSection.astro';
+
+export const prerender = true;
+---
+
+<BaseLayout>
+  <!-- Hero: autonomous bot swarm command center & telemetry -->
+  <HeroSection />
+
+  <!-- About: introduction, realistic engineer portrait & specialized skills -->
+  <AboutPreview />
+
+  <!-- Selected Work: 6 specialized security, bot automation & OSINT projects -->
+  <ProjectIndex />
+
+  <!-- Vendor & Discord Solutions: classy capabilities matrix replacing resume timeline -->
+  <VendorSolutions />
+
+  <!-- Contact: direct consultation form, Discord & verified contact portals -->
+  <ContactSection />
+</BaseLayout>

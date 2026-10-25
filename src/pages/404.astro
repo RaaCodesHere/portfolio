@@ -1,0 +1,194 @@
+---
+/* RaaSki — Custom 404 Error Page.
+   Dark obsidian cyberpunk theme with cluster diagnostic readouts and navigation. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+export const prerender = true;
+---
+
+<BaseLayout>
+  <section class="error-page section" aria-label="Page Not Found">
+    <div class="container error-container">
+      <div class="error-visual reveal">
+        <div class="error-beacon-wrap">
+          <span class="error-beacon-radar"></span>
+          <span class="error-code-badge">HTTP 404 &bull; NODE NOT FOUND</span>
+        </div>
+
+        <h1 class="error-title">
+          Route <span class="text-accent">Decommissioned</span> or Offline
+        </h1>
+
+        <p class="error-desc">
+          The autonomous cluster node or resource URL you attempted to reach does not exist or has been relocated to another worker gateway.
+        </p>
+
+        <!-- Cyber Diagnostic Terminal Box -->
+        <div class="error-terminal">
+          <div class="error-terminal-header">
+            <div class="error-terminal-dots">
+              <span class="dot dot--red"></span>
+              <span class="dot dot--yellow"></span>
+              <span class="dot dot--green"></span>
+            </div>
+            <span class="error-terminal-title">GATEWAY_DIAGNOSTICS // FAULT_TRACE</span>
+          </div>
+          <pre class="error-terminal-body"><code><span class="term-err">[CLUSTER_GATEWAY_WARN]</span> 404 NOT_FOUND on path: window.location.pathname
+<span class="term-dim">01</span> Status Code: 404 (Resource Unreachable)
+<span class="term-dim">02</span> Upstream Node: worker_pool_alpha (Checked 64 nodes)
+<span class="term-dim">03</span> Target Proxy: socks5://res-pool.gateway:1080 (Timed out)
+<span class="term-dim">04</span> Resolution: Verify destination endpoint or return to cluster root.</code></pre>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="error-actions">
+          <a href="/" class="btn btn--primary" data-cursor-hover>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
+            <span>Return to Command Center</span>
+          </a>
+          <a href="/#contact" class="btn btn--secondary" data-cursor-hover>
+            <span>Report Missing Route</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(80px + var(--space-12)) 0 var(--space-16);
+    position: relative;
+  }
+
+  .error-container {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .error-beacon-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-6);
+  }
+
+  .error-beacon-radar {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #EF4444;
+    box-shadow: 0 0 10px #EF4444;
+    animation: statusPulse 1.6s infinite;
+  }
+
+  .error-code-badge {
+    font-family: var(--font-mono);
+    font-size: var(--size-xs);
+    font-weight: 700;
+    color: #F87171;
+    letter-spacing: 0.5px;
+  }
+
+  .error-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: #F8FAFC;
+    line-height: 1.15;
+    margin-bottom: var(--space-4);
+  }
+
+  .text-accent {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .error-desc {
+    font-size: var(--size-body);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-8);
+  }
+
+  /* Cyber Diagnostics Terminal */
+  .error-terminal {
+    background: rgba(15, 20, 32, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-align: left;
+    margin-bottom: var(--space-8);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .error-terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    background: rgba(22, 29, 47, 0.96);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .error-terminal-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+
+  .dot--red { background-color: #EF4444; }
+  .dot--yellow { background-color: #F59E0B; }
+  .dot--green { background-color: #10B981; }
+
+  .error-terminal-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: #94A3B8;
+  }
+
+  .error-terminal-body {
+    padding: 12px 16px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: #CBD5E1;
+    overflow-x: auto;
+  }
+
+  .term-err {
+    color: #F87171;
+    font-weight: 700;
+  }
+
+  .term-dim {
+    color: #64748B;
+    margin-right: 6px;
+  }
+
+  .error-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+</style>

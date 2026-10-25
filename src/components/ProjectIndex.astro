@@ -1,0 +1,545 @@
+---
+/* RaaSki — project showcase.
+   Clean, authentic, human-crafted portfolio cards with real Python architecture
+   previews, category filtering, tech stack tags, and direct verified links.
+   Zero strain, zero fake console modals, 100% accessible. */
+import { projects } from '../data/projects';
+
+const isDev = import.meta.env.DEV;
+const published = projects.filter((p) => !p.draft);
+const candidates = isDev ? projects : published;
+
+const projectCodeSnippets: Record<string, { filename: string; lines: { num: string; code: string }[] }> = {
+  'proj-01': {
+    filename: 'cerberus_intel.py',
+    lines: [
+      { num: '01', code: 'async def scan_darkweb_leaks(target_domain: str) -> list[ThreatReport]:' },
+      { num: '02', code: '    session = await proxy_pool.get_camoufox_session()' },
+      { num: '03', code: '    leaks = await session.query_onion_indexes(target_domain)' },
+      { num: '04', code: '    return [ThreatReport.parse(l) for l in leaks if l.score > 0.85]' },
+      { num: '05', code: '    # Dispatches instant alert to webhook within 180ms' }
+    ]
+  },
+  'proj-02': {
+    filename: 'aegis_sentinel.py',
+    lines: [
+      { num: '01', code: '@bot.event' },
+      { num: '02', code: 'async def on_member_join(member: discord.Member):' },
+      { num: '03', code: '    if anomaly_detector.is_raid_spike(member.guild.id):' },
+      { num: '04', code: '        await member.kick(reason="Anti-raid quarantine trigger")' },
+      { num: '05', code: '        await audit_bus.publish("RAID_INTERCEPT", guild_id=member.guild.id)' }
+    ]
+  },
+  'proj-03': {
+    filename: 'pos_bridge.py',
+    lines: [
+      { num: '01', code: '@app.post("/webhooks/clover-checkout")' },
+      { num: '02', code: 'async def handle_pos_checkout(payload: POSWebhook, hmac_sig: str = Header()):' },
+      { num: '03', code: '    verify_hmac_sha256(payload, hmac_sig)' },
+      { num: '04', code: '    await celery_app.send_task("sync_inventory", args=[payload.sku, -1])' },
+      { num: '05', code: '    return {"status": "SYNCED_DISPATCHED", "remaining_stock": payload.qty}' }
+    ]
+  },
+  'proj-04': {
+    filename: 'stealth_cluster.py',
+    lines: [
+      { num: '01', code: 'async def fetch_protected_feed(url: str, proxy: SOCKS5Endpoint) -> str:' },
+      { num: '02', code: '    async with async_playwright() as p:' },
+      { num: '03', code: '        browser = await p.chromium.launch(proxy={"server": proxy.url})' },
+      { num: '04', code: '        context = await apply_ja3_fingerprint(browser, "TLS_CHACHA20")' },
+      { num: '05', code: '        return await (await context.new_page()).goto(url)' }
+    ]
+  },
+  'proj-05': {
+    filename: 'discopay_escrow.py',
+    lines: [
+      { num: '01', code: '@bot.tree.command(name="checkout", description="Purchase VIP store item")' },
+      { num: '02', code: 'async def checkout_command(interaction: discord.Interaction, item_id: str):' },
+      { num: '03', code: '    invoice = await stripe_gateway.create_invoice(item_id, interaction.user.id)' },
+      { num: '04', code: '    await interaction.response.send_message(embed=invoice.to_embed(), ephemeral=True)' },
+      { num: '05', code: '    # Provisions Discord role automatically upon webhook settlement' }
+    ]
+  },
+  'proj-06': {
+    filename: 'specter_takedown.py',
+    lines: [
+      { num: '01', code: 'async def audit_brand_infringements(brand: str) -> None:' },
+      { num: '02', code: '    rogue_domains = await dns_recon.find_typosquats(brand)' },
+      { num: '03', code: '    for domain in rogue_domains:' },
+      { num: '04', code: '        dossier = await generate_abuse_pdf(domain)' },
+      { num: '05', code: '        await registrar_api.submit_takedown(domain, dossier)' }
+    ]
+  }
+};
+---
+
+<section id="projects" class="work section" aria-label="Selected projects">
+  <div class="container">
+    <div id="work" class="work-header reveal">
+      <div class="section-tag-badge">
+        <span class="tag-badge-dot"></span>
+        <span>PRODUCTION PORTFOLIO</span>
+      </div>
+      <h2 class="section-title">Security, Bot &amp; OSINT Systems</h2>
+      <p class="section-subtitle">
+        A curated showcase of autonomous Discord bots, retail vendor pipelines,
+        stealth web scrapers, and OSINT threat intelligence meshes built with Python.
+      </p>
+
+      <!-- Category Filter Tabs -->
+      <div class="project-filter-tabs" role="tablist" aria-label="Project Categories">
+        <button class="filter-btn is-active" data-filter="all" type="button">All Projects</button>
+        <button class="filter-btn" data-filter="osint" type="button">Security &amp; OSINT</button>
+        <button class="filter-btn" data-filter="discord" type="button">Discord Infrastructure</button>
+        <button class="filter-btn" data-filter="vendor" type="button">Vendor &amp; POS Systems</button>
+        <button class="filter-btn" data-filter="scraping" type="button">Stealth Web Scraping</button>
+      </div>
+    </div>
+
+    {candidates.length === 0 ? (
+      <div class="empty-state reveal">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+          <polyline points="16 3 12 7 8 3" />
+        </svg>
+        <p class="empty-text">No published projects yet.</p>
+        <p class="empty-subtext">Project case studies will appear here once content is supplied.</p>
+      </div>
+    ) : (
+      <div class="project-grid" id="project-cards-grid">
+        {candidates.map((project) => {
+          const draft = project.draft && isDev;
+          const categoryKey = project.filterCategory || 'scraping';
+          const snippet = projectCodeSnippets[project.id] || {
+            filename: `${project.id}.py`,
+            lines: [{ num: '01', code: '# Implementation architecture module' }]
+          };
+
+          return (
+            <article class={`project-card reveal ${draft ? 'project-card--draft' : ''}`} data-category={categoryKey} data-project-id={project.id}>
+              <!-- Architecture Code Window Header -->
+              <div class="card-code-window">
+                <div class="code-window-bar">
+                  <div class="code-window-dots">
+                    <span class="w-dot w-dot--red"></span>
+                    <span class="w-dot w-dot--yellow"></span>
+                    <span class="w-dot w-dot--green"></span>
+                  </div>
+                  <span class="code-window-filename">{snippet.filename}</span>
+                  <span class="code-window-lang">Python 3.12</span>
+                </div>
+
+                <div class="code-window-body">
+                  <pre class="code-snippet-pre"><code>{snippet.lines.map((l) => (
+                    <span class="code-line"><span class="line-num">{l.num}</span><span class="line-text">{l.code}</span></span>
+                  ))}</code></pre>
+                </div>
+              </div>
+
+              <!-- Card Content Body -->
+              <div class="card-body">
+                <div class="card-meta-row">
+                  <span class="card-category">{project.category}</span>
+                  {draft && <span class="draft-badge">Draft</span>}
+                </div>
+                <h3 class="card-title">{project.title}</h3>
+                <p class="card-description">{project.description}</p>
+                
+                <div class="card-tags">
+                  {project.tags.map((tag) => (
+                    <span class="card-tag">{tag}</span>
+                  ))}
+                </div>
+
+                <!-- Grounded, Real Action Links -->
+                <div class="card-action-row">
+                  <a
+                    href={project.githubUrl || 'https://github.com/RaaCodesHere'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-card-action btn-card-action--primary"
+                    title={`View ${project.title} on GitHub`}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                    </svg>
+                    <span>View on GitHub</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </a>
+
+                  <a href="#contact" class="btn-card-action btn-card-action--secondary" title="Discuss implementation architecture">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span>Discuss Architecture</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    )}
+  </div>
+</section>
+
+<!-- Filter Logic (Lightweight & Zero-strain) -->
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.project-card');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+      filterBtns.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      cards.forEach((card) => {
+        const cat = card.getAttribute('data-category');
+        const cardEl = card as HTMLElement;
+        if (filter === 'all' || cat === filter) {
+          cardEl.style.display = 'flex';
+          setTimeout(() => {
+            cardEl.style.opacity = '1';
+            cardEl.style.transform = 'translateY(0)';
+          }, 40);
+        } else {
+          cardEl.style.opacity = '0';
+          cardEl.style.transform = 'translateY(8px)';
+          setTimeout(() => {
+            cardEl.style.display = 'none';
+          }, 180);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .work-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .work-header .section-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--space-6);
+    max-width: 65ch;
+  }
+
+  /* Filter Tabs */
+  .project-filter-tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px;
+    background: rgba(19, 27, 46, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+    margin-top: var(--space-4);
+  }
+
+  .filter-btn {
+    padding: 7px 16px;
+    font-size: var(--size-xs);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .filter-btn:hover {
+    color: #F8FAFC;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .filter-btn.is-active {
+    background: linear-gradient(135deg, #06B6D4, #0284C7);
+    color: #FFFFFF;
+    box-shadow: 0 4px 14px rgba(6, 182, 212, 0.4);
+  }
+
+  /* ---------- Grid ---------- */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+
+  /* ---------- Card ---------- */
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(19, 27, 46, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: transform var(--duration-normal) var(--ease-spring),
+                box-shadow var(--duration-normal) var(--ease-spring),
+                border-color var(--duration-normal) ease,
+                opacity 0.2s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 20px rgba(6, 182, 212, 0.12);
+    border-color: rgba(6, 182, 212, 0.35);
+  }
+
+  /* ---------- Code Window Header ---------- */
+  .card-code-window {
+    background: #090D16;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .code-window-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: rgba(14, 20, 34, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: var(--font-mono);
+  }
+
+  .code-window-dots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .w-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .w-dot--red { background: #EF4444; }
+  .w-dot--yellow { background: #F59E0B; }
+  .w-dot--green { background: #10B981; }
+
+  .code-window-filename {
+    font-size: 11px;
+    font-weight: 700;
+    color: #94A3B8;
+    letter-spacing: 0.3px;
+  }
+
+  .code-window-lang {
+    font-size: 10px;
+    font-weight: 600;
+    color: #38BDF8;
+    padding: 2px 7px;
+    background: rgba(6, 182, 212, 0.12);
+    border: 1px solid rgba(6, 182, 212, 0.25);
+    border-radius: var(--radius-sm);
+  }
+
+  .code-window-body {
+    padding: 12px 14px;
+    overflow-x: auto;
+  }
+
+  .code-snippet-pre {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.6;
+    color: #E2E8F0;
+  }
+
+  .code-line {
+    display: flex;
+    gap: 12px;
+  }
+
+  .line-num {
+    color: #475569;
+    user-select: none;
+    font-size: 10px;
+    min-width: 16px;
+    text-align: right;
+  }
+
+  .line-text {
+    color: #CBD5E1;
+    white-space: pre;
+    font-weight: 500;
+  }
+
+  /* ---------- Card Body ---------- */
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-6);
+    flex: 1;
+    gap: var(--space-4);
+  }
+
+  .card-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-category {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: #38BDF8;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+  }
+
+  .draft-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: #F59E0B;
+    background: rgba(245, 158, 11, 0.15);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  .card-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    line-height: var(--leading-snug);
+    margin: 0;
+  }
+
+  .card-description {
+    font-size: var(--size-body);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin: 0;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .card-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 9px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    color: #94A3B8;
+  }
+
+  /* Grounded Action Links */
+  .card-action-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: var(--space-3);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: auto;
+  }
+
+  .btn-card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .btn-card-action--primary {
+    background: rgba(6, 182, 212, 0.15);
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    color: #E0F2FE;
+  }
+
+  .btn-card-action--primary:hover {
+    background: linear-gradient(135deg, #06B6D4, #0284C7);
+    border-color: #38BDF8;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(6, 182, 212, 0.35);
+  }
+
+  .btn-card-action--secondary {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #94A3B8;
+  }
+
+  .btn-card-action--secondary:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #F8FAFC;
+    transform: translateY(-1px);
+  }
+
+  /* ---------- Empty state ---------- */
+  .empty-state {
+    text-align: center;
+    padding: var(--space-16) 0;
+  }
+
+  .empty-text {
+    font-size: var(--size-h4);
+    color: var(--color-text-secondary);
+    margin-top: var(--space-4);
+  }
+
+  .empty-subtext {
+    font-size: var(--size-body);
+    color: var(--color-text-muted);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .project-filter-tabs {
+      flex-wrap: wrap;
+      justify-content: center;
+      border-radius: var(--radius-lg);
+    }
+
+    .card-body {
+      padding: var(--space-4);
+    }
+
+    .card-action-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .btn-card-action {
+      justify-content: center;
+    }
+  }
+</style>

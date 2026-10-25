@@ -1,0 +1,416 @@
+---
+/* RaaSki — premium floating glassmorphism header navigation.
+   Features animated cyber monogram, centered pill navigation with hover states,
+   quick-access CTA button, and responsive mobile drawer. */
+---
+
+<header class="header" id="header" aria-label="Primary navigation">
+  <div class="header-container">
+    <!-- Brand Monogram & Animated Cyber Identity -->
+    <a class="brand" href="/" aria-label="RaaSki Home">
+      <div class="brand-icon-wrap" aria-hidden="true">
+        <svg class="brand-svg" width="30" height="30" viewBox="0 0 32 32" fill="none">
+          <defs>
+            <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#06B6D4" />
+              <stop offset="50%" stop-color="#3B82F6" />
+              <stop offset="100%" stop-color="#10B981" />
+            </linearGradient>
+            <filter id="iconGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="2" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- Outer Hexagonal Cyber Shell with Orbit Animation -->
+          <polygon
+            class="hex-shell"
+            points="16,2 29,9.5 29,22.5 16,30 3,22.5 3,9.5"
+            stroke="url(#brandGrad)"
+            stroke-width="1.8"
+            fill="rgba(19, 27, 46, 0.9)"
+            filter="url(#iconGlow)"
+          />
+
+          <!-- Circuit Rays with Pulse -->
+          <line class="circuit-ray" x1="16" y1="5" x2="16" y2="11.5" stroke="url(#brandGrad)" stroke-width="1.5" stroke-linecap="round" />
+          <line class="circuit-ray" x1="16" y1="20.5" x2="16" y2="27" stroke="url(#brandGrad)" stroke-width="1.5" stroke-linecap="round" />
+          <line class="circuit-ray" x1="6.5" y1="11.5" x2="12" y2="14" stroke="url(#brandGrad)" stroke-width="1.5" stroke-linecap="round" />
+          <line class="circuit-ray" x1="20" y1="18" x2="25.5" y2="20.5" stroke="url(#brandGrad)" stroke-width="1.5" stroke-linecap="round" />
+
+          <!-- Central Pulsing Core & Orbiting Satellite -->
+          <circle class="core-outer" cx="16" cy="16" r="5" fill="#6366F1" fill-opacity="0.35" />
+          <circle class="core-inner" cx="16" cy="16" r="3.2" fill="url(#brandGrad)" />
+          <circle class="core-dot" cx="16" cy="16" r="1.4" fill="#FFFFFF" />
+
+          <!-- Orbiting Satellite Beacon -->
+          <circle class="orbit-dot" cx="24.5" cy="8.5" r="1.8" fill="#06B6D4">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" />
+          </circle>
+        </svg>
+      </div>
+
+      <div class="brand-text-block">
+        <span class="brand-name">RaaSki</span>
+        <span class="brand-role">BOT ARCHITECT &bull; OSINT</span>
+      </div>
+    </a>
+
+    <!-- Center Floating Pill Navigation -->
+    <nav class="nav-pill" aria-label="Main sections">
+      <a class="nav-pill-link" href="/#about">About</a>
+      <a class="nav-pill-link" href="/#projects">Projects</a>
+      <a class="nav-pill-link" href="/#solutions">Solutions</a>
+      <a class="nav-pill-link" href="/status">Status</a>
+      <a class="nav-pill-link" href="/#contact">Contact</a>
+    </nav>
+
+    <!-- Header Actions (Right) -->
+    <div class="header-actions">
+      <!-- Direct Contact CTA -->
+      <a class="header-cta-btn" href="/#contact" data-cursor-hover title="Direct Consultation">
+        <span class="cta-beacon"></span>
+        <span class="cta-btn-text">Get in Touch</span>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        class="burger-btn"
+        id="burger"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Slide Drawer -->
+  <div class="mobile-drawer" id="mobile-menu" aria-hidden="true">
+    <nav class="mobile-nav-list" aria-label="Mobile navigation">
+      <a class="mobile-link" href="/#about">About</a>
+      <a class="mobile-link" href="/#projects">Projects</a>
+      <a class="mobile-link" href="/#solutions">Solutions &amp; Capabilities</a>
+      <a class="mobile-link" href="/status">Cluster Status &amp; Nodes</a>
+      <a class="mobile-link" href="/#contact">Contact &amp; Discord</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: var(--space-3) var(--space-6);
+    transition: all var(--duration-normal) ease;
+  }
+
+  .header.is-scrolled {
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+  }
+
+  .header.is-scrolled .header-container {
+    background: rgba(11, 15, 25, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 1px rgba(99, 102, 241, 0.2);
+  }
+
+  .header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-5);
+    background: rgba(11, 15, 25, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+    transition: all var(--duration-normal) ease;
+  }
+
+  /* ---------- Brand & Animated Icon ---------- */
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .brand-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Continuous Micro-Animation for Brand Icon */
+  .hex-shell {
+    transform-origin: 16px 16px;
+    animation: hexBreathe 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes hexBreathe {
+    0% {
+      stroke-opacity: 0.7;
+      stroke-width: 1.6;
+    }
+    100% {
+      stroke-opacity: 1;
+      stroke-width: 2.2;
+      filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.6));
+    }
+  }
+
+  .circuit-ray {
+    animation: rayGlow 2.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes rayGlow {
+    0% { stroke-opacity: 0.4; }
+    100% { stroke-opacity: 1; stroke-width: 2; }
+  }
+
+  .core-outer {
+    transform-origin: 16px 16px;
+    animation: corePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes corePulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.35;
+    }
+    50% {
+      transform: scale(1.4);
+      opacity: 0.8;
+    }
+  }
+
+  .brand:hover .brand-icon-wrap {
+    transform: rotate(12deg) scale(1.1);
+    transition: transform var(--duration-fast) var(--ease-spring);
+  }
+
+  .brand-text-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--color-text-primary);
+    line-height: 1.1;
+  }
+
+  .brand-role {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #38BDF8;
+    margin-top: 2px;
+  }
+
+  /* ---------- Center Floating Pill Nav ---------- */
+  .nav-pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 6px;
+    background: rgba(19, 27, 46, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-pill-link {
+    padding: 6px 16px;
+    font-size: var(--size-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-full);
+    transition: all var(--duration-fast) ease;
+    text-decoration: none;
+  }
+
+  .nav-pill-link:hover {
+    color: #F8FAFC;
+    background: rgba(6, 182, 212, 0.16);
+  }
+
+  /* ---------- Right Actions ---------- */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .header-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 16px;
+    background: rgba(6, 182, 212, 0.12);
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+    font-size: var(--size-xs);
+    font-weight: 700;
+    color: #E0F2FE;
+    text-decoration: none;
+    transition: all var(--duration-fast) var(--ease-spring);
+  }
+
+  .header-cta-btn:hover {
+    background: linear-gradient(135deg, #06B6D4 0%, #10B981 100%);
+    border-color: transparent;
+    color: #FFFFFF;
+    box-shadow: 0 0 16px rgba(6, 182, 212, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .cta-beacon {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10B981;
+    box-shadow: 0 0 8px #10B981;
+    animation: beaconPulse 1.8s infinite;
+  }
+
+  @keyframes beaconPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.5; }
+  }
+
+  /* Burger Menu */
+  .burger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    background: rgba(19, 27, 46, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+
+  .burger-bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-text-primary);
+    border-radius: 2px;
+    transition: all var(--duration-fast) ease;
+  }
+
+  /* Mobile Drawer */
+  .mobile-drawer {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: var(--space-4);
+    right: var(--space-4);
+    margin-top: 8px;
+    padding: var(--space-4);
+    background: rgba(11, 15, 25, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: all var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .mobile-drawer.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .mobile-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--size-base);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-lg);
+    transition: all var(--duration-fast) ease;
+    text-decoration: none;
+  }
+
+  .mobile-link:hover {
+    color: #FFFFFF;
+    background: rgba(99, 102, 241, 0.15);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 868px) {
+    .nav-pill {
+      display: none;
+    }
+
+    .burger-btn {
+      display: flex;
+    }
+
+    .mobile-drawer {
+      display: block;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header {
+      padding: var(--space-2) var(--space-3);
+    }
+
+    .header-container {
+      padding: var(--space-2) var(--space-3);
+    }
+
+    .brand-name {
+      font-size: 1.1rem;
+    }
+
+    .header-cta-btn .cta-btn-text {
+      display: none;
+    }
+
+    .header-cta-btn {
+      padding: 7px;
+    }
+  }
+</style>

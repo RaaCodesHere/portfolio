@@ -1,0 +1,278 @@
+---
+/* RaaSki — Terms of Service.
+   Ethical web scraping, bot automation policies, rate limits, and compliance. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+export const prerender = true;
+---
+
+<BaseLayout>
+  <section class="legal-page section" aria-label="Terms of Service">
+    <div class="container legal-container">
+      <!-- Section Header -->
+      <div class="legal-header reveal">
+        <div class="section-tag-badge">
+          <span class="tag-badge-dot"></span>
+          <span>COMPLIANCE & PROTOCOLS</span>
+        </div>
+        <h1 class="legal-title">Terms of Service</h1>
+        <p class="legal-meta">
+          <span>Effective Date: October 2026</span>
+          <span class="meta-divider">&bull;</span>
+          <span>Version 2.4</span>
+        </p>
+      </div>
+
+      <!-- Legal Content Articles -->
+      <div class="legal-content reveal" style="--delay: 150ms;">
+        <article class="legal-card">
+          <div class="legal-card-num">01</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Scope of Bot Automation & Development Services</h2>
+            <p>
+              RaaSki provides custom Python development, autonomous bot engineering, robotic process automation (RPA), headless browser pipelines, and distributed data harvesting microservices. By engaging our services or utilizing software developed under the RaaSki portfolio, you agree to comply with the terms detailed herein.
+            </p>
+            <p>
+              All bots, scripts, and worker clusters are delivered strictly for legitimate business automation, data analytics, market research, and operational workflow enhancement.
+            </p>
+          </div>
+        </article>
+
+        <article class="legal-card">
+          <div class="legal-card-num">02</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Ethical Web Scraping & Rate-Limiting Policy</h2>
+            <p>
+              RaaSki adheres to responsible data harvesting engineering standards:
+            </p>
+            <ul class="legal-list">
+              <li><strong>Public Data Only:</strong> Scraping pipelines are engineered exclusively to harvest publicly accessible data. Bots must not attempt unauthorized access into protected accounts or circumvention of paywalls.</li>
+              <li><strong>Concurrency & Civility:</strong> Automated scrapers must implement adaptive rate-limiting, jitter delays, and exponential backoff to avoid overloading target servers or degrading host performance.</li>
+              <li><strong>No Hostile Attacks:</strong> Under no circumstances will bots be engineered for distributed denial-of-service (DDoS), credential stuffing, ticket scalping, or automated malicious abuse.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="legal-card">
+          <div class="legal-card-num">03</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Residential Proxies & Third-Party Endpoints</h2>
+            <p>
+              Clients providing their own proxy gateways (BrightData, Oxylabs, Smartproxy, etc.) or API tokens remain solely responsible for the legitimate acquisition and legal compliance of those resources. RaaSki does not provide unauthorized proxy access or compromised networks.
+            </p>
+            <p>
+              Because third-party website owners frequently update DOM structures, anti-bot heuristics, or API schemas, ongoing maintenance and adapter updates may be required over time.
+            </p>
+          </div>
+        </article>
+
+        <article class="legal-card">
+          <div class="legal-card-num">04</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Client Credentials & Zero-Retention Security</h2>
+            <p>
+              We operate under a strict zero-retention security policy regarding sensitive client assets:
+            </p>
+            <ul class="legal-list">
+              <li>Discord Application Secrets, POS &amp; Vendor Webhook Keys, database connection strings, and API credentials are configured strictly via environment variables (<code>.env</code>) and are never stored on unauthorized public servers.</li>
+              <li>Upon project handover and milestone acceptance, temporary testing tokens are permanently revoked from development sandbox environments.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="legal-card">
+          <div class="legal-card-num">05</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Intellectual Property & Code Ownership</h2>
+            <p>
+              Upon complete settlement of agreed development fees, the client obtains full ownership rights to bespoke application code, custom parsing algorithms, and designated automation workflows, subject to standard open-source licenses governing underlying third-party Python packages (e.g., Playwright, BeautifulSoup, Celery, FastAPI).
+            </p>
+          </div>
+        </article>
+
+        <article class="legal-card">
+          <div class="legal-card-num">06</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Limitation of Liability</h2>
+            <p>
+              In no event shall RaaSki be held liable for indirect, incidental, or consequential damages resulting from upstream third-party platform API deprecations, IP bans resulting from client-directed high concurrency, or unauthorized modifications made to the delivered codebase by third parties.
+            </p>
+          </div>
+        </article>
+
+        <div class="legal-contact-callout">
+          <div class="callout-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div class="callout-body">
+            <h3 class="callout-title">Have Questions Regarding Compliance or Custom Bot Scope?</h3>
+            <p class="callout-text">Reach out via our Discord portal or email to discuss custom architectural requirements and legal compliance checks.</p>
+            <a href="/#contact" class="btn btn--primary" data-cursor-hover>
+              <span>Contact Engineering</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding: calc(80px + var(--space-12)) 0 var(--space-20);
+  }
+
+  .legal-container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .legal-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .legal-title {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    color: #F8FAFC;
+    letter-spacing: var(--tracking-tight);
+    margin: var(--space-4) 0 var(--space-2);
+  }
+
+  .legal-meta {
+    font-family: var(--font-mono);
+    font-size: var(--size-xs);
+    color: var(--color-text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .meta-divider {
+    color: var(--color-border);
+  }
+
+  /* Content Cards */
+  .legal-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .legal-card {
+    display: flex;
+    gap: var(--space-6);
+    background: rgba(15, 20, 32, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    transition: transform var(--duration-normal) var(--ease-spring),
+                border-color var(--duration-normal) ease;
+  }
+
+  .legal-card:hover {
+    border-color: rgba(99, 102, 241, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .legal-card-num {
+    font-family: var(--font-mono);
+    font-size: var(--size-h3);
+    font-weight: 800;
+    color: #6366F1;
+    line-height: 1;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .legal-card-body {
+    flex: 1;
+  }
+
+  .legal-heading {
+    font-size: var(--size-h4);
+    font-weight: 700;
+    color: #F8FAFC;
+    margin-bottom: var(--space-3);
+  }
+
+  .legal-card-body p {
+    font-size: var(--size-body);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-3);
+  }
+
+  .legal-card-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .legal-list {
+    margin: var(--space-3) 0 var(--space-4);
+    padding-left: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .legal-list li {
+    font-size: var(--size-body);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+  }
+
+  .legal-list strong {
+    color: #F8FAFC;
+  }
+
+  /* Callout */
+  .legal-contact-callout {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    margin-top: var(--space-4);
+  }
+
+  .callout-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .callout-body {
+    flex: 1;
+  }
+
+  .callout-title {
+    font-size: var(--size-h4);
+    font-weight: 700;
+    color: #F8FAFC;
+    margin-bottom: var(--space-1);
+  }
+
+  .callout-text {
+    font-size: var(--size-body);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  @media (max-width: 640px) {
+    .legal-card {
+      flex-direction: column;
+      padding: var(--space-6);
+      gap: var(--space-3);
+    }
+
+    .legal-contact-callout {
+      flex-direction: column;
+      text-align: center;
+      gap: var(--space-4);
+    }
+  }
+</style>

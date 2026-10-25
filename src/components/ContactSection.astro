@@ -1,0 +1,421 @@
+---
+/* RaaSki — contact section.
+   Clean, centered contact area with social media SVG icons and a styled
+   contact form with floating labels (Name, Email, Message).
+   Contact destination is intentionally incomplete until real info is supplied. */
+---
+
+<section id="contact" class="contact section" aria-label="Contact">
+  <div class="container">
+    <div class="contact-header reveal">
+      <div class="section-tag-badge">
+        <span class="tag-badge-dot"></span>
+        <span>GET IN TOUCH</span>
+      </div>
+      <h2 class="section-title">Automate Your Operations</h2>
+      <p class="section-subtitle">
+        Need a specialized Python bot, high-throughput web scraper, or autonomous
+        workflow? Drop a message to discuss your automation pipeline.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Contact info column -->
+      <div class="contact-info reveal">
+        <!-- Email -->
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </div>
+          <div>
+            <p class="contact-detail-label">Email</p>
+            <p class="contact-detail-value"><a href="mailto:contact@codewithraa.me" style="color:inherit;text-decoration:none;">contact@codewithraa.me</a></p>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </div>
+          <div>
+            <p class="contact-detail-label">Location &amp; Availability</p>
+            <p class="contact-detail-value">Kathmandu, Nepal (UTC +5:45) &bull; Remote</p>
+          </div>
+        </div>
+
+        <!-- Socials -->
+        <div class="contact-socials">
+          <p class="socials-label">Direct Communication Portals</p>
+          <div class="socials-row">
+            <!-- GitHub -->
+            <a href="https://github.com/RaaCodesHere" class="social-link" aria-label="GitHub profile" data-cursor-hover title="GitHub" target="_blank" rel="noopener noreferrer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/samyog-dhakal/" class="social-link" aria-label="LinkedIn profile" data-cursor-hover title="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+            <!-- Discord -->
+            <a href="https://discord.com/users/1105760622462914623" class="social-link social-link--discord" aria-label="Discord profile" data-cursor-hover title="Discord Direct Message" target="_blank" rel="noopener noreferrer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <form class="contact-form reveal" id="contact-form" style="--delay: 150ms;" novalidate>
+        <div class="form-group">
+          <input
+            type="text"
+            id="form-name"
+            name="name"
+            class="form-input"
+            placeholder=" "
+            required
+            autocomplete="name"
+          />
+          <label for="form-name" class="form-label">Your Name</label>
+          <div class="form-highlight"></div>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="email"
+            id="form-email"
+            name="email"
+            class="form-input"
+            placeholder=" "
+            required
+            autocomplete="email"
+          />
+          <label for="form-email" class="form-label">Your Email</label>
+          <div class="form-highlight"></div>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            id="form-discord"
+            name="discord_handle"
+            class="form-input"
+            placeholder=" "
+            autocomplete="off"
+          />
+          <label for="form-discord" class="form-label">Discord Username / Server ID (Optional)</label>
+          <div class="form-highlight"></div>
+        </div>
+
+        <div class="form-group">
+          <textarea
+            id="form-message"
+            name="message"
+            class="form-input form-textarea"
+            placeholder=" "
+            required
+            rows="4"
+          ></textarea>
+          <label for="form-message" class="form-label">Project Scope &amp; Target Operations</label>
+          <div class="form-highlight"></div>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full" data-cursor-hover>
+          <span>Dispatch Consultation Inquiry</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="22" y1="2" x2="11" y2="13" />
+            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+          </svg>
+        </button>
+
+        <p class="form-note" id="form-status-note">
+          Guaranteed response within 4 hours. Direct Discord escalations prioritized.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .contact-header .section-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+
+  /* ---------- Contact info ---------- */
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .contact-detail-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--color-accent-subtle);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: var(--radius-md);
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .contact-detail-label {
+    font-family: var(--font-mono);
+    font-size: var(--size-xs);
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    margin-bottom: var(--space-1);
+  }
+
+  .contact-detail-value {
+    font-size: var(--size-body);
+    color: var(--color-text-secondary);
+  }
+
+  /* ---------- Socials ---------- */
+  .contact-socials {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .socials-label {
+    font-family: var(--font-mono);
+    font-size: var(--size-xs);
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    margin-bottom: var(--space-4);
+  }
+
+  .socials-row {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    transition: all var(--duration-normal) var(--ease-out-quart);
+  }
+
+  .social-link:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    background: var(--color-accent-subtle);
+    transform: translateY(-2px);
+  }
+
+  .social-link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Form ---------- */
+  .contact-form {
+    padding: var(--space-8);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    position: relative;
+  }
+
+  .contact-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-accent);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .form-group {
+    position: relative;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: var(--space-5) var(--space-4) var(--space-2);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-primary);
+    font-size: var(--size-body);
+    outline: none;
+    transition: border-color var(--duration-normal) ease,
+                box-shadow var(--duration-normal) ease;
+  }
+
+  .form-input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-subtle);
+  }
+
+  /* Floating label */
+  .form-label {
+    position: absolute;
+    top: 50%;
+    left: var(--space-4);
+    transform: translateY(-50%);
+    font-size: var(--size-body);
+    color: var(--color-text-tertiary);
+    pointer-events: none;
+    transition: all var(--duration-normal) var(--ease-out-quart);
+    transform-origin: left center;
+  }
+
+  .form-textarea ~ .form-label {
+    top: var(--space-5);
+    transform: translateY(0);
+  }
+
+  /* Float label up when input has content or is focused */
+  .form-input:focus ~ .form-label,
+  .form-input:not(:placeholder-shown) ~ .form-label {
+    top: var(--space-2);
+    transform: translateY(0) scale(0.75);
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .form-textarea:focus ~ .form-label,
+  .form-textarea:not(:placeholder-shown) ~ .form-label {
+    top: var(--space-1);
+    transform: translateY(0) scale(0.75);
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    padding-top: var(--space-6);
+    line-height: var(--leading-body);
+  }
+
+  .form-highlight {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-accent);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    transition: width var(--duration-slow) var(--ease-out-expo);
+  }
+
+  .form-input:focus ~ .form-highlight {
+    width: 100%;
+  }
+
+  /* Submit button */
+  .btn--full {
+    width: 100%;
+    justify-content: center;
+    padding: var(--space-5) var(--space-8);
+    font-size: var(--size-body);
+  }
+
+  .btn--primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--gradient-accent);
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    border: none;
+    box-shadow: var(--shadow-glow), var(--shadow-md);
+    transition: all var(--duration-normal) var(--ease-out-quart);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 32px rgba(6, 182, 212, 0.35), var(--shadow-lg);
+  }
+
+  .btn--primary:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .btn--primary:focus-visible {
+    outline: 2px solid var(--color-accent-hover);
+    outline-offset: 3px;
+  }
+
+  .btn--primary svg {
+    transition: transform var(--duration-normal) var(--ease-out-quart);
+  }
+
+  .btn--primary:hover svg {
+    transform: translateX(3px);
+  }
+
+  .form-note {
+    font-family: var(--font-mono);
+    font-size: var(--size-xs);
+    color: var(--color-text-muted);
+    text-align: center;
+    line-height: var(--leading-body);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-10);
+    }
+
+    .contact-form {
+      padding: var(--space-6);
+    }
+  }
+</style>

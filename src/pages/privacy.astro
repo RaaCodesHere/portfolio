@@ -1,0 +1,271 @@
+---
+/* RaaSki — Privacy Policy.
+   Information collection, proxy routing, client credentials, and local storage. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+export const prerender = true;
+---
+
+<BaseLayout>
+  <section class="legal-page section" aria-label="Privacy Policy">
+    <div class="container legal-container">
+      <!-- Section Header -->
+      <div class="legal-header reveal">
+        <div class="section-tag-badge">
+          <span class="tag-badge-dot"></span>
+          <span>DATA INTEGRITY & PRIVACY</span>
+        </div>
+        <h1 class="legal-title">Privacy Policy</h1>
+        <p class="legal-meta">
+          <span>Effective Date: October 2026</span>
+          <span class="meta-divider">&bull;</span>
+          <span>Version 2.4</span>
+        </p>
+      </div>
+
+      <!-- Legal Content Articles -->
+      <div class="legal-content reveal" style="--delay: 150ms;">
+        <article class="legal-card">
+          <div class="legal-card-num">01</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Zero Tracker Philosophy</h2>
+            <p>
+              Your privacy is fundamental. This portfolio website operates with zero third-party advertising tracking scripts, zero invasive analytics beacons, and no behavioral surveillance networks. We do not sell, rent, or monetize visitor interaction telemetry.
+            </p>
+          </div>
+        </article>
+
+        <article class="legal-card">
+          <div class="legal-card-num">02</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Information Collected Through Direct Inquiries</h2>
+            <p>
+              When you submit a project automation request through our contact form, Discord channel, or email:
+            </p>
+            <ul class="legal-list">
+              <li><strong>Contact Details:</strong> Your provided name, email address, or Discord handle are used exclusively to evaluate project specifications and reply to your consultation.</li>
+              <li><strong>Project Architecture Notes:</strong> Target URLs, required data schemas, and pipeline scope provided during consultations are treated as strictly confidential proprietary information.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="legal-card">
+          <div class="legal-card-num">03</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Ephemeral Bot Logs & Proxy Routing</h2>
+            <p>
+              During automated crawler development and testing:
+            </p>
+            <ul class="legal-list">
+              <li>Proxy logs containing egress IP addresses, TLS handshake timing, and HTTP response codes are processed in ephemeral memory buffers for real-time debugging only.</li>
+              <li>Harvested target datasets are stored directly within client-controlled destinations (e.g., client PostgreSQL, S3 buckets, or local JSON/CSV outputs). RaaSki does not retain secondary copies of harvested client data.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="legal-card">
+          <div class="legal-card-num">04</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Zero Cookies &amp; Clean Local Storage</h2>
+            <p>
+              This website does not deploy marketing tracking cookies, advertising beacons, or surveillance trackers. The portfolio is built to be clean, fast, and privacy-respecting across all devices.
+            </p>
+          </div>
+        </article>
+
+        <article class="legal-card">
+          <div class="legal-card-num">05</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Client Confidentiality &amp; API Security</h2>
+            <p>
+              Credentials provided for custom bot and vendor integrations (Discord Application Tokens, POS API Secrets, database connection strings, and residential proxy credentials) are strictly encrypted at rest during active development and permanently wiped upon project acceptance.
+            </p>
+          </div>
+        </article>
+
+        <article class="legal-card">
+          <div class="legal-card-num">06</div>
+          <div class="legal-card-body">
+            <h2 class="legal-heading">Security Inquiries & Audit Requests</h2>
+            <p>
+              If you have inquiries regarding data protection protocols, bot sandboxing environments, or wish to request the deletion of historical inquiry communications, please contact us directly.
+            </p>
+          </div>
+        </article>
+
+        <div class="legal-contact-callout">
+          <div class="callout-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="callout-body">
+            <h3 class="callout-title">Direct Inquiries & Security Audits</h3>
+            <p class="callout-text">Connect with engineering for security reviews, data deletion requests, or confidential consultations.</p>
+            <a href="/#contact" class="btn btn--primary" data-cursor-hover>
+              <span>Contact Security Lead</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding: calc(80px + var(--space-12)) 0 var(--space-20);
+  }
+
+  .legal-container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .legal-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .legal-title {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    color: #F8FAFC;
+    letter-spacing: var(--tracking-tight);
+    margin: var(--space-4) 0 var(--space-2);
+  }
+
+  .legal-meta {
+    font-family: var(--font-mono);
+    font-size: var(--size-xs);
+    color: var(--color-text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .meta-divider {
+    color: var(--color-border);
+  }
+
+  /* Content Cards */
+  .legal-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .legal-card {
+    display: flex;
+    gap: var(--space-6);
+    background: rgba(15, 20, 32, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    transition: transform var(--duration-normal) var(--ease-spring),
+                border-color var(--duration-normal) ease;
+  }
+
+  .legal-card:hover {
+    border-color: rgba(6, 182, 212, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .legal-card-num {
+    font-family: var(--font-mono);
+    font-size: var(--size-h3);
+    font-weight: 800;
+    color: #06B6D4;
+    line-height: 1;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .legal-card-body {
+    flex: 1;
+  }
+
+  .legal-heading {
+    font-size: var(--size-h4);
+    font-weight: 700;
+    color: #F8FAFC;
+    margin-bottom: var(--space-3);
+  }
+
+  .legal-card-body p {
+    font-size: var(--size-body);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-3);
+  }
+
+  .legal-card-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .legal-list {
+    margin: var(--space-3) 0 var(--space-4);
+    padding-left: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .legal-list li {
+    font-size: var(--size-body);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+  }
+
+  .legal-list strong {
+    color: #F8FAFC;
+  }
+
+  /* Callout */
+  .legal-contact-callout {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    margin-top: var(--space-4);
+  }
+
+  .callout-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .callout-body {
+    flex: 1;
+  }
+
+  .callout-title {
+    font-size: var(--size-h4);
+    font-weight: 700;
+    color: #F8FAFC;
+    margin-bottom: var(--space-1);
+  }
+
+  .callout-text {
+    font-size: var(--size-body);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  @media (max-width: 640px) {
+    .legal-card {
+      flex-direction: column;
+      padding: var(--space-6);
+      gap: var(--space-3);
+    }
+
+    .legal-contact-callout {
+      flex-direction: column;
+      text-align: center;
+      gap: var(--space-4);
+    }
+  }
+</style>

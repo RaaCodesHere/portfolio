@@ -1,0 +1,166 @@
+/* RaaSki — design tokens.
+   Dual-theme system: dark (default) and light mode.
+   Single source of truth for color, typography, spacing, radius, and motion. */
+
+/* ========== DARK THEME (default) ========== */
+:root {
+  /* ---------- Core palette ---------- */
+  --color-bg:           #0B0F19;
+  --color-bg-elevated:  #111827;
+  --color-bg-card:      #1A1F2E;
+  --color-surface:      #1E2333;
+  --color-surface-hover:#252B3B;
+  --color-border:       rgba(255, 255, 255, 0.08);
+  --color-border-strong:rgba(255, 255, 255, 0.14);
+  --color-glass:        rgba(11, 15, 25, 0.72);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+
+  /* ---------- Header & Layout Metrics ---------- */
+  --header-height:      84px;
+
+  /* ---------- Text ---------- */
+  --color-text-primary:   #F1F5F9;
+  --color-text-secondary: #94A3B8;
+  --color-text-tertiary:  #64748B;
+  --color-text-muted:     #475569;
+
+  /* ---------- Accent (Electric Cyan & Radiant Emerald) ---------- */
+  --color-accent:           #06B6D4;
+  --color-accent-hover:     #38BDF8;
+  --color-accent-subtle:    rgba(6, 182, 212, 0.12);
+  --color-accent-glow:      rgba(6, 182, 212, 0.35);
+  --color-accent-emerald:   #10B981;
+  --color-accent-blue:      #3B82F6;
+
+  /* ---------- Semantic ---------- */
+  --color-success:  #10B981;
+  --color-warning:  #FBBF24;
+  --color-error:    #F87171;
+  --color-info:     #06B6D4;
+
+  /* ---------- Gradients ---------- */
+  --gradient-accent:        linear-gradient(135deg, #06B6D4 0%, #3B82F6 50%, #10B981 100%);
+  --gradient-cyan-emerald:  linear-gradient(135deg, #06B6D4 0%, #10B981 100%);
+  --gradient-surface:       linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%);
+  --gradient-glow:          radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(6, 182, 212, 0.08), transparent 40%);
+  --gradient-hero-bg:       radial-gradient(ellipse 80% 60% at 20% 30%, rgba(6, 182, 212, 0.12) 0%, transparent 60%),
+                            radial-gradient(ellipse 60% 70% at 80% 70%, rgba(16, 185, 129, 0.09) 0%, transparent 50%);
+
+  /* ---------- Shadows ---------- */
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg:  0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.55);
+  --shadow-glow:0 0 24px rgba(6, 182, 212, 0.2);
+  --shadow-card:0 4px 24px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--color-border);
+}
+
+/* ========== LIGHT THEME ========== */
+[data-theme="light"] {
+  --color-bg:            #FAFBFF;
+  --color-bg-elevated:   #FFFFFF;
+  --color-bg-card:       #FFFFFF;
+  --color-surface:       #F1F5F9;
+  --color-surface-hover: #E2E8F0;
+  --color-border:        rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.14);
+  --color-glass:         rgba(250, 251, 255, 0.78);
+  --color-glass-border:  rgba(0, 0, 0, 0.06);
+
+  --color-text-primary:   #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-tertiary:  #64748B;
+  --color-text-muted:     #94A3B8;
+
+  --color-accent:         #4F46E5;
+  --color-accent-hover:   #6366F1;
+  --color-accent-subtle:  rgba(79, 70, 229, 0.08);
+  --color-accent-glow:    rgba(79, 70, 229, 0.2);
+
+  --gradient-accent:  linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #8B5CF6 100%);
+  --gradient-surface: linear-gradient(135deg, rgba(79, 70, 229, 0.06) 0%, rgba(124, 58, 237, 0.03) 100%);
+  --gradient-glow:    radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(79, 70, 229, 0.04), transparent 40%);
+  --gradient-hero-bg: radial-gradient(ellipse 80% 60% at 20% 30%, rgba(79, 70, 229, 0.06) 0%, transparent 60%),
+                      radial-gradient(ellipse 60% 70% at 80% 70%, rgba(124, 58, 237, 0.04) 0%, transparent 50%);
+
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg:  0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.12);
+  --shadow-glow:0 0 24px rgba(79, 70, 229, 0.08);
+  --shadow-card:0 1px 3px rgba(0, 0, 0, 0.06), 0 0 0 1px var(--color-border);
+}
+
+/* ========== SHARED TOKENS (both themes) ========== */
+:root {
+  /* ---------- Typography ---------- */
+  --font-primary:  'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:     'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+
+  --size-display:   clamp(2.75rem, 6vw + 1rem, 5rem);
+  --size-h2:        clamp(1.75rem, 3vw + 0.5rem, 2.5rem);
+  --size-h3:        1.375rem;
+  --size-body:      1rem;
+  --size-body-lg:   1.125rem;
+  --size-sm:        0.875rem;
+  --size-xs:        0.75rem;
+  --size-nav:       0.9375rem;
+
+  --leading-tight:  1.15;
+  --leading-body:   1.65;
+  --leading-loose:  1.8;
+
+  --tracking-tight: -0.03em;
+  --tracking-normal: 0;
+  --tracking-wide:  0.05em;
+  --tracking-wider: 0.12em;
+
+  /* ---------- Spacing ---------- */
+  --space-0:  0;
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ---------- Layout ---------- */
+  --max-width:     1200px;
+  --container-pad: clamp(1rem, 4vw, 2rem);
+
+  /* ---------- Radius ---------- */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* ---------- Motion ---------- */
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart:  cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --duration-fast:    120ms;
+  --duration-normal:  220ms;
+  --duration-slow:    400ms;
+  --duration-slower:  600ms;
+  --duration-reveal:  800ms;
+
+  --motion-entrance:  600ms var(--ease-out-expo);
+  --motion-reveal:    800ms var(--ease-out-expo);
+  --motion-feedback:  180ms ease;
+  --motion-hover:     280ms var(--ease-out-quart);
+
+  /* ---------- Z-index ---------- */
+  --z-cursor:  9999;
+  --z-nav:     1000;
+  --z-overlay: 900;
+  --z-card:    1;
+}

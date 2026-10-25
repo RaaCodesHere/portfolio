@@ -1,0 +1,783 @@
+---
+/* RaaSki — about section.
+   1. Authentic human developer identity card featuring aesthetic coder cat avatar,
+      Kathmandu Nepal location chip, verified credentials, and direct verified portals.
+   2. Elevated technical capability cards for Discord, OSINT, and Python ecosystems.
+   3. 100% responsive, high-contrast, zero AI slop. */
+import { defaultPortfolioData } from '../data/portfolioData';
+
+const { about, contact } = defaultPortfolioData;
+---
+
+<section id="about" class="about section" aria-label="About me">
+  <div class="container">
+    <div class="about-header reveal">
+      <div class="section-tag-badge">
+        <span class="tag-badge-dot"></span>
+        <span>ENGINEERING PROFILE &bull; EXPERTISE</span>
+      </div>
+      <h2 class="section-title">{about.sectionTitle}</h2>
+      <p class="section-subtitle">
+        {about.sectionSubtitle}
+      </p>
+    </div>
+
+    <div class="about-grid">
+      <!-- Left Column: Authentic Developer Identity Card with Aesthetic Cat Avatar -->
+      <div class="about-profile-card reveal" style="--delay: 100ms;">
+        <div class="profile-card-top">
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar-frame">
+              <img
+                src="/images/cat-avatar.jpg"
+                alt="Samyog Dhakal (RaaSki) Developer Cat Avatar"
+                class="profile-cat-img"
+                width="112"
+                height="112"
+                loading="lazy"
+              />
+              <div class="avatar-ring-glow"></div>
+            </div>
+            <div class="profile-status-badge">
+              <span class="status-pulse-dot"></span>
+              <span class="status-text">Available for Contracts</span>
+            </div>
+          </div>
+
+          <div class="profile-identity">
+            <h3 class="profile-name">Samyog Dhakal</h3>
+            <span class="profile-handle">RaaSki &bull; @RaaCodesHere</span>
+          </div>
+
+          <div class="profile-location-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            <span>Kathmandu, Nepal &bull; UTC +5:45</span>
+          </div>
+        </div>
+
+        <div class="profile-details">
+          <div class="profile-credentials">
+            <div class="cred-item">
+              <span class="cred-num text-cyan">5+ Yrs</span>
+              <span class="cred-label">Python Focus</span>
+            </div>
+            <div class="cred-divider"></div>
+            <div class="cred-item">
+              <span class="cred-num text-emerald">172+</span>
+              <span class="cred-label">Deployments</span>
+            </div>
+            <div class="cred-divider"></div>
+            <div class="cred-item">
+              <span class="cred-num text-blue">99.9%</span>
+              <span class="cred-label">Reliability</span>
+            </div>
+          </div>
+
+          <!-- Direct Verified Links -->
+          <div class="profile-links-grid">
+            <a href={contact.socials.github} target="_blank" rel="noopener noreferrer" class="profile-link-btn" title="GitHub Profile">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+              <span>GitHub</span>
+            </a>
+
+            <a href={contact.socials.discord} target="_blank" rel="noopener noreferrer" class="profile-link-btn profile-link-btn--discord" title="Discord Profile">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+              </svg>
+              <span>Discord</span>
+            </a>
+
+            <a href={contact.socials.linkedin} target="_blank" rel="noopener noreferrer" class="profile-link-btn" title="LinkedIn Profile">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+
+            <a href={`mailto:${contact.email}`} class="profile-link-btn" title="Email Samyog">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              <span>Email</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Bio & Elevated Categorized Skill Cards (Picture 1 Improvement) -->
+      <div class="about-content reveal" style="--delay: 200ms;">
+        <div class="about-text-block">
+          {about.bioParagraphs.map((para) => (
+            <p class="about-body">{para}</p>
+          ))}
+        </div>
+
+        <div class="about-highlights-grid">
+          <div class="about-highlight-item">
+            <div class="highlight-icon-box highlight-icon-box--cyan">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </div>
+            <div>
+              <strong class="highlight-title">Discord &amp; Gateway Mastery</strong>
+              <p class="highlight-desc">High-throughput WebSocket event loops, token-bucket rate limiters &amp; anti-raid rollbacks.</p>
+            </div>
+          </div>
+
+          <div class="about-highlight-item">
+            <div class="highlight-icon-box highlight-icon-box--emerald">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div>
+              <strong class="highlight-title">Stealth Evasion &amp; Reverse Engineering</strong>
+              <p class="highlight-desc">Playwright &amp; Camoufox clusters evading Cloudflare Turnstile &amp; DataDome with 0 bans.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Divider (Connects Profile & Technical Capabilities) -->
+    <div class="about-divider reveal" style="--delay: 200ms;" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-pill">
+        <span class="divider-dot"></span>
+        <span>SPECIALIZED CAPABILITY MATRIX</span>
+        <span class="divider-dot"></span>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Full-Width Technical Capabilities Grid (Spans both sidebars across 1200px container) -->
+    <div class="about-skills-section reveal" style="--delay: 250ms;">
+      {about.skillCategories.map((category, idx) => (
+        <div class={`skill-category-card skill-category-card--${idx === 0 ? 'cyan' : idx === 1 ? 'emerald' : 'blue'}`}>
+          <div class="skill-card-top-accent"></div>
+          <div class="skill-card-header">
+            <div class={`skill-icon-wrap ${idx === 0 ? 'icon-cyan' : idx === 1 ? 'icon-emerald' : 'icon-blue'}`}>
+              {idx === 0 && (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+                </svg>
+              )}
+              {idx === 1 && (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              )}
+              {idx === 2 && (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                  <polyline points="2 17 12 22 22 17" />
+                  <polyline points="2 12 12 17 22 12" />
+                </svg>
+              )}
+            </div>
+            <div class="skill-header-meta">
+              <h3 class="skill-card-title">{category.name}</h3>
+              <span class="skill-count-badge">{category.skills.length} Tools</span>
+            </div>
+          </div>
+          <div class="skill-tags-flow">
+            {category.skills.map((skill) => (
+              <span class={`skill-chip skill-chip--${idx === 0 ? 'cyan' : idx === 1 ? 'emerald' : 'blue'}`} data-cursor-hover>
+                <span class="chip-dot"></span>
+                <span class="chip-text">{skill}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .about-header .section-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 60ch;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 390px 1fr;
+    gap: var(--space-10);
+    align-items: start;
+  }
+
+  /* ---------- Profile Card (Left) with Cat Avatar (Picture 3) ---------- */
+  .about-profile-card {
+    background: rgba(14, 20, 34, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    transition: transform var(--duration-normal) var(--ease-spring), border-color var(--duration-fast) ease;
+  }
+
+  .about-profile-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(6, 182, 212, 0.4);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55), 0 0 24px rgba(6, 182, 212, 0.2);
+  }
+
+  .profile-card-top {
+    padding: var(--space-8) var(--space-6) var(--space-5);
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.45) 0%, rgba(14, 20, 34, 0.7) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-4);
+  }
+
+  .profile-avatar-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .profile-avatar-frame {
+    position: relative;
+    width: 104px;
+    height: 104px;
+    border-radius: 26px;
+    padding: 3px;
+    background: linear-gradient(135deg, #06B6D4 0%, #3B82F6 50%, #10B981 100%);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(6, 182, 212, 0.35);
+  }
+
+  .profile-cat-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 23px;
+    display: block;
+    background: #0B0F19;
+  }
+
+  .avatar-ring-glow {
+    position: absolute;
+    inset: -4px;
+    border-radius: 30px;
+    border: 1px dashed rgba(6, 182, 212, 0.4);
+    pointer-events: none;
+    animation: ringSpin 20s linear infinite;
+  }
+
+  @keyframes ringSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .profile-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: var(--radius-full);
+  }
+
+  .status-pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 6px #10B981;
+    animation: statusPulse 2s infinite;
+    flex-shrink: 0;
+  }
+
+  .status-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: #6EE7B7;
+  }
+
+  .profile-identity {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .profile-name {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .profile-handle {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #38BDF8;
+    font-weight: 600;
+  }
+
+  .profile-location-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #94A3B8;
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-full);
+  }
+
+  .profile-details {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .profile-credentials {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background: rgba(11, 15, 25, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+  }
+
+  .cred-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .cred-num {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .text-cyan { color: #38BDF8; }
+  .text-emerald { color: #34D399; }
+  .text-blue { color: #60A5FA; }
+
+  .cred-label {
+    font-size: 10px;
+    color: #94A3B8;
+  }
+
+  .cred-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .profile-links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .profile-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: #CBD5E1;
+    text-decoration: none;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .profile-link-btn:hover {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: #06B6D4;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
+  }
+
+  .profile-link-btn--discord:hover {
+    background: rgba(88, 101, 242, 0.2);
+    border-color: #5865F2;
+    color: #FFFFFF;
+  }
+
+  /* ---------- Bio & Skills (Right Column - Picture 1 Improvement) ---------- */
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .about-text-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .about-body {
+    font-size: var(--size-body-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-loose);
+    margin: 0;
+  }
+
+  .about-highlights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .about-highlight-item {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: rgba(14, 20, 34, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+  }
+
+  .highlight-icon-box {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .highlight-icon-box--cyan {
+    background: rgba(6, 182, 212, 0.15);
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    color: #38BDF8;
+  }
+
+  .highlight-icon-box--emerald {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #34D399;
+  }
+
+  .highlight-title {
+    display: block;
+    font-size: var(--size-body);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+  }
+
+  .highlight-desc {
+    font-size: var(--size-xs);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin: 0;
+  }
+
+  /* ---------- About Section Divider (Bridge) ---------- */
+  .about-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin: var(--space-10) 0 var(--space-6);
+    width: 100%;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  }
+
+  .divider-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    background: rgba(14, 20, 34, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .divider-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #06B6D4;
+    box-shadow: 0 0 8px #06B6D4;
+    animation: dotPulse 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes dotPulse {
+    from { opacity: 0.6; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1.15); box-shadow: 0 0 10px #10B981; background: #10B981; }
+  }
+
+  /* ---------- Elevated Skill Cards (Full-Width 3-Column Tri-Color Grid) ---------- */
+  .about-skills-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .skill-category-card {
+    background: rgba(19, 27, 46, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform var(--duration-fast) ease, border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  }
+
+  .skill-category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  }
+
+  .skill-category-card--cyan:hover {
+    border-color: rgba(6, 182, 212, 0.45);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(6, 182, 212, 0.12);
+  }
+
+  .skill-category-card--emerald:hover {
+    border-color: rgba(16, 185, 129, 0.45);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.12);
+  }
+
+  .skill-category-card--blue:hover {
+    border-color: rgba(59, 130, 246, 0.45);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.12);
+  }
+
+  .skill-card-top-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+  }
+
+  .skill-category-card--cyan .skill-card-top-accent {
+    background: linear-gradient(90deg, #06B6D4, transparent);
+  }
+
+  .skill-category-card--emerald .skill-card-top-accent {
+    background: linear-gradient(90deg, #10B981, transparent);
+  }
+
+  .skill-category-card--blue .skill-card-top-accent {
+    background: linear-gradient(90deg, #3B82F6, transparent);
+  }
+
+  .skill-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .skill-icon-wrap {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon-cyan {
+    background: rgba(6, 182, 212, 0.15);
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    color: #22D3EE;
+  }
+
+  .icon-emerald {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #34D399;
+  }
+
+  .icon-blue {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    color: #93C5FD;
+  }
+
+  .skill-header-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    gap: 10px;
+  }
+
+  .skill-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #F8FAFC;
+    margin: 0;
+    letter-spacing: -0.2px;
+  }
+
+  .skill-count-badge {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 3px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    color: #CBD5E1;
+  }
+
+  .skill-tags-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .skill-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-size: 11.5px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: #F1F5F9;
+    background: rgba(25, 36, 60, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-full);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    transition: all var(--duration-fast) ease;
+  }
+
+  .chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .skill-chip--cyan {
+    border-color: rgba(6, 182, 212, 0.35);
+    background: rgba(6, 182, 212, 0.08);
+  }
+  .skill-chip--cyan .chip-dot {
+    background: #06B6D4;
+    box-shadow: 0 0 6px #06B6D4;
+  }
+  .skill-chip--cyan:hover {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: #06B6D4;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(6, 182, 212, 0.35);
+  }
+
+  .skill-chip--emerald {
+    border-color: rgba(16, 185, 129, 0.35);
+    background: rgba(16, 185, 129, 0.08);
+  }
+  .skill-chip--emerald .chip-dot {
+    background: #10B981;
+    box-shadow: 0 0 6px #10B981;
+  }
+  .skill-chip--emerald:hover {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: #10B981;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  }
+
+  .skill-chip--blue {
+    border-color: rgba(59, 130, 246, 0.35);
+    background: rgba(59, 130, 246, 0.08);
+  }
+  .skill-chip--blue .chip-dot {
+    background: #38BDF8;
+    box-shadow: 0 0 6px #38BDF8;
+  }
+  .skill-chip--blue:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: #38BDF8;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .about-skills-section {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+      margin-top: var(--space-8);
+    }
+  }
+
+  @media (max-width: 968px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+
+    .about-profile-card {
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .about-highlights-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

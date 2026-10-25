@@ -1,0 +1,49 @@
+---
+/* RaaSki — base layout.
+   Imports the global design system, Google Fonts, custom SVG favicon,
+   renders the shared shell: cursor, header, main, footer. */
+import '../styles/global.css';
+import PortfolioHeader from '../components/PortfolioHeader.astro';
+import PortfolioFooter from '../components/PortfolioFooter.astro';
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="RaaSki — Python Bot Architect & OSINT Automation Specialist. Engineering high-concurrency Discord bot frameworks, retail vendor POS pipelines, stealth web scraping clusters, and autonomous reconnaissance swarms." />
+    <title>RaaSki — Python Bot Architect & OSINT Specialist</title>
+
+    <!-- Custom animated cyber shield SVG favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts: Plus Jakarta Sans + JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Preload critical resources -->
+    <meta name="theme-color" content="#0B0F19" />
+    <meta name="color-scheme" content="dark" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <!-- Custom cursor elements (hidden on touch devices via CSS) -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+
+    <PortfolioHeader />
+
+    <main id="content">
+      <slot />
+    </main>
+
+    <PortfolioFooter />
+
+    <!-- Main application script -->
+    <script>
+      import '../scripts/homepage.ts';
+    </script>
+  </body>
+</html>
