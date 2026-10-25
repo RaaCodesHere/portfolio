@@ -135,7 +135,7 @@ div[id] {
 }
 
 .section {
-  padding: var(--space-24) 0;
+  padding: var(--section-pad) 0;
   position: relative;
 }
 

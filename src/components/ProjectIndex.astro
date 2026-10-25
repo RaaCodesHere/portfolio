@@ -80,19 +80,19 @@ const projectCodeSnippets: Record<string, { filename: string; lines: { num: stri
         <span class="tag-badge-dot"></span>
         <span>PRODUCTION PORTFOLIO</span>
       </div>
-      <h2 class="section-title">Security, Bot &amp; OSINT Systems</h2>
+      <h2 class="section-title">Enterprise Systems &amp; Automation Pipelines</h2>
       <p class="section-subtitle">
-        A curated showcase of autonomous Discord bots, retail vendor pipelines,
-        stealth web scrapers, and OSINT threat intelligence meshes built with Python.
+        A curated showcase of fault-tolerant Python backends, retail POS integration pipelines,
+        stealth web extraction clusters, and OSINT reconnaissance meshes.
       </p>
 
       <!-- Category Filter Tabs -->
       <div class="project-filter-tabs" role="tablist" aria-label="Project Categories">
-        <button class="filter-btn is-active" data-filter="all" type="button">All Projects</button>
-        <button class="filter-btn" data-filter="osint" type="button">Security &amp; OSINT</button>
-        <button class="filter-btn" data-filter="discord" type="button">Discord Infrastructure</button>
+        <button class="filter-btn is-active" data-filter="all" type="button">All Systems</button>
+        <button class="filter-btn" data-filter="backend" type="button">Backends &amp; Microservices</button>
         <button class="filter-btn" data-filter="vendor" type="button">Vendor &amp; POS Systems</button>
-        <button class="filter-btn" data-filter="scraping" type="button">Stealth Web Scraping</button>
+        <button class="filter-btn" data-filter="osint" type="button">Security &amp; OSINT</button>
+        <button class="filter-btn" data-filter="scraping" type="button">Stealth Scraping</button>
       </div>
     </div>
 
@@ -170,12 +170,22 @@ const projectCodeSnippets: Record<string, { filename: string; lines: { num: stri
                     </svg>
                   </a>
 
-                  <a href="#contact" class="btn-card-action btn-card-action--secondary" title="Discuss implementation architecture">
+                  <button
+                    type="button"
+                    class="btn-card-action btn-card-action--secondary btn-project-architecture"
+                    data-project-id={project.id}
+                    data-project-title={project.title}
+                    data-project-category={project.category}
+                    data-project-snippet={snippet.filename}
+                    title="Open architectural specifications for this system"
+                  >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                      <polyline points="2 17 12 22 22 17"></polyline>
+                      <polyline points="2 12 12 17 22 12"></polyline>
                     </svg>
                     <span>Discuss Architecture</span>
-                  </a>
+                  </button>
                 </div>
               </div>
             </article>
@@ -221,7 +231,7 @@ const projectCodeSnippets: Record<string, { filename: string; lines: { num: stri
 <style>
   .work-header {
     text-align: center;
-    margin-bottom: var(--space-12);
+    margin-bottom: clamp(2rem, 3.5vw, 3rem);
   }
 
   .work-header .section-subtitle {
@@ -272,7 +282,7 @@ const projectCodeSnippets: Record<string, { filename: string; lines: { num: stri
   .project-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-8);
+    gap: clamp(1.5rem, 2.5vw, 2.25rem);
   }
 
   /* ---------- Card ---------- */

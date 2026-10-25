@@ -8,6 +8,8 @@ import AboutPreview from '../components/AboutPreview.astro';
 import ProjectIndex from '../components/ProjectIndex.astro';
 import VendorSolutions from '../components/VendorSolutions.astro';
 import ContactSection from '../components/ContactSection.astro';
+import ArchitectureModal from '../components/ArchitectureModal.astro';
+import QuickConnectModal from '../components/QuickConnectModal.astro';
 
 export const prerender = true;
 ---
@@ -22,9 +24,13 @@ export const prerender = true;
   <!-- Selected Work: 6 specialized security, bot automation & OSINT projects -->
   <ProjectIndex />
 
-  <!-- Vendor & Discord Solutions: classy capabilities matrix replacing resume timeline -->
+  <!-- Vendor & Systems Solutions: enterprise capabilities matrix replacing resume timeline -->
   <VendorSolutions />
 
   <!-- Contact: direct consultation form, Discord & verified contact portals -->
   <ContactSection />
+
+  <!-- Interactive Modal Overlays -->
+  <ArchitectureModal />
+  <QuickConnectModal />
 </BaseLayout>

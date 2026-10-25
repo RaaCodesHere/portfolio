@@ -152,8 +152,411 @@ if (typeof document !== 'undefined') {
   }
 
   /* ===================================================================
-     7. CONTACT FORM (Encrypted Client Submission)
+     7. ARCHITECTURE DEEP-DIVE MODAL HANDLER
      =================================================================== */
+  interface ProjectArchSpec {
+    title: string;
+    category: string;
+    sla: string;
+    latency: string;
+    subtitle: string;
+    systemType: string;
+    flow: {
+      ingest: { name: string; desc: string };
+      verify: { name: string; desc: string };
+      queue: { name: string; desc: string };
+      dispatch: { name: string; desc: string };
+    };
+    specs: {
+      concurrency: string;
+      security: string;
+      storage: string;
+      rate: string;
+    };
+  }
+
+  const projectSpecs: Record<string, ProjectArchSpec> = {
+    'proj-01': {
+      title: 'Cerberus OSINT — Threat Intelligence & Breach Surveillance Mesh',
+      category: 'OSINT & THREAT INTELLIGENCE',
+      sla: '99.9% UPTIME SLA',
+      latency: 'P99: < 180ms Alert',
+      subtitle: 'Multi-threaded reconnaissance crawler monitoring paste sites and credential leaks with automated takedown PDF dossier generation.',
+      systemType: 'osint',
+      flow: {
+        ingest: { name: 'Paste & Darkweb Feeds', desc: 'Asynchronous event crawler scanning paste sites and leak repos.' },
+        verify: { name: 'Regex & Entropy Scoring', desc: 'High-speed heuristic validation of exposed credentials and private keys.' },
+        queue: { name: 'Redis Streams Queue', desc: 'Buffered threat pub/sub distributing forensic tasks across workers.' },
+        dispatch: { name: 'Instant Webhook & PDF', desc: 'Sub-180ms webhook trigger with automated forensic evidence dump.' }
+      },
+      specs: {
+        concurrency: 'Python 3.12 (asyncio + Playwright)',
+        security: 'Tor SOCKS5 + Transient Sessions',
+        storage: 'Redis Streams & SQLite (WAL)',
+        rate: 'Token Bucket (12,000 pings/min)'
+      }
+    },
+    'proj-02': {
+      title: 'Aegis Sentinel — Enterprise Community & Merchant Defense Gateway',
+      category: 'HIGH-CONCURRENCY BACKEND DEFENSE',
+      sla: '< 4.0s RECOVERY SLA',
+      latency: 'P99: < 35ms Filter',
+      subtitle: 'High-throughput security gateway with behavioral raid detection, token quarantine, and automated SQLite WAL state rollbacks.',
+      systemType: 'microservices',
+      flow: {
+        ingest: { name: 'WebSocket Event Stream', desc: 'High-speed event ingestion with zero serialization delay.' },
+        verify: { name: 'Behavioral Anomaly Heuristics', desc: 'Rolling window pattern analyzer identifying burst joins & mass bans.' },
+        queue: { name: 'Token-Bucket Shield', desc: 'Capacity of 50 tokens with 25/sec refill; eliminates 429 lockouts.' },
+        dispatch: { name: 'Sub-4s WAL State Rollback', desc: 'Instant permission tree restore via continuous SQLite snapshot bus.' }
+      },
+      specs: {
+        concurrency: 'Asynchronous Event Loop (50k req/min)',
+        security: 'HMAC Authentication & Ephemeral Tokens',
+        storage: 'SQLite WAL Snapshots + Redis Cache',
+        rate: 'Sliding Window Token Bucket'
+      }
+    },
+    'proj-03': {
+      title: 'OmniVendor Bridge — Real-Life POS & Multi-Channel Vendor Pipeline',
+      category: 'RETAIL POS & INVENTORY RECONCILIATION',
+      sla: '99.9% UPTIME SLA',
+      latency: 'P99: < 24ms Sync',
+      subtitle: 'Fault-tolerant POS webhook pipeline connecting physical Clover/Square registers with digital checkouts and atomic inventory locks.',
+      systemType: 'pos',
+      flow: {
+        ingest: { name: 'Hardware POS Webhook', desc: 'Inbound transaction payload from physical Clover/Square store register.' },
+        verify: { name: 'HMAC-SHA256 Signature', desc: 'Cryptographic header validation; zero plain token disk storage.' },
+        queue: { name: 'Celery + ACID Row Lock', desc: 'Atomic database row lock prevents overselling across channels.' },
+        dispatch: { name: 'Multi-Store Reconciliation', desc: 'Sub-second inventory depletion broadcast & automated Stripe receipt.' }
+      },
+      specs: {
+        concurrency: 'FastAPI + Celery Distributed Task Pool',
+        security: 'HMAC-SHA256 Signature Verification',
+        storage: 'PostgreSQL with Row-Level Locks',
+        rate: 'Rate-limited Celery worker concurrency'
+      }
+    },
+    'proj-04': {
+      title: 'GhostProxy Stealth Engine — Cloudflare Turnstile & DataDome Evasion',
+      category: 'ANTI-DETECTION BROWSER CLUSTERS',
+      sla: '0.00% BAN RATE',
+      latency: 'P99: < 320ms Render',
+      subtitle: 'Autonomous browser crawler framework utilizing TLS JA3/JA4 spoofing, canvas 2D noise, and residential proxy rotation.',
+      systemType: 'stealth',
+      flow: {
+        ingest: { name: 'Target Scraping Task', desc: 'Distributed queue job defining target endpoint and extract rules.' },
+        verify: { name: 'TLS JA4 & Canvas Camoufox', desc: 'Randomized browser fingerprinting evading Cloudflare and DataDome.' },
+        queue: { name: 'Residential SOCKS5 Mesh', desc: 'Healthy endpoint selector prioritizing latency under 35ms.' },
+        dispatch: { name: 'JSON Feed Ingestion', desc: 'Structured data extraction delivered directly to database queue.' }
+      },
+      specs: {
+        concurrency: 'Playwright Headless + Camoufox Mesh',
+        security: 'Residential SOCKS5 Rotation + TLS Ciphers',
+        storage: 'Redis Task Queue & JSON Pipelines',
+        rate: '25M+ Monthly Requests Evaluated'
+      }
+    },
+    'proj-05': {
+      title: 'Discopay Escrow & Commerce Engine — Multi-Channel Storefront',
+      category: 'COMMERCE & ESCROW AUTOMATION',
+      sla: '99.9% SETTLEMENT SLA',
+      latency: 'P99: < 40ms Webhook',
+      subtitle: 'Custom commerce gateway allowing vendors to sell physical & digital stock seamlessly with instant invoice generation and escrow.',
+      systemType: 'vendor',
+      flow: {
+        ingest: { name: 'Customer Checkout Trigger', desc: 'Interactive order generation via storefront interface or webhook.' },
+        verify: { name: 'Stripe & Crypto Settlement', desc: 'Cryptographic invoice signing and multi-sig escrow verification.' },
+        queue: { name: 'Role & License Provisioner', desc: 'Automated digital license issuance and customer role grants.' },
+        dispatch: { name: 'Dispute Arbitration Bus', desc: 'Automated escrow lock with ticket escalation and refund ledger.' }
+      },
+      specs: {
+        concurrency: 'FastAPI + Asynchronous Worker Queue',
+        security: 'Stripe Webhook Signatures & Encrypted Keys',
+        storage: 'PostgreSQL Ledger with Audit Logs',
+        rate: 'Zero-drop webhook retry architecture'
+      }
+    },
+    'proj-06': {
+      title: 'SpecterWatch — Brand Protection & Rogue Clone Surveillance',
+      category: 'BRAND RECONNAISSANCE & PROTECTION',
+      sla: '24/7 DOMAIN SURVEILLANCE',
+      latency: 'P99: < 120s Dossier',
+      subtitle: 'Automated surveillance crawler identifying typosquatted vendor domains and fake storefronts, instantly generating takedown dossiers.',
+      systemType: 'osint',
+      flow: {
+        ingest: { name: 'Brand Domain Seed', desc: 'Monitors brand keywords across 140+ top-level domain registrars.' },
+        verify: { name: 'Levenshtein & WHOIS Recon', desc: 'Typosquatting permutation scoring and registrar entity correlation.' },
+        queue: { name: 'Evidence Snapshot Queue', desc: 'Automated headless browser screenshotting & DNS record archival.' },
+        dispatch: { name: 'Abuse PDF Dossier Dispatch', desc: 'Automated takedown dossier generation sent directly to registrar abuse.' }
+      },
+      specs: {
+        concurrency: 'Scrapy + Async WHOIS Resolver',
+        security: 'Passive DNS Reconnaissance Only',
+        storage: 'ReportLab PDF Synthesis + SQLite Cache',
+        rate: '140+ TLDs Continuously Polled'
+      }
+    }
+  };
+
+  const archDialog = document.getElementById('architecture-dialog') as HTMLDialogElement | null;
+  let currentActiveSpec: ProjectArchSpec | null = null;
+
+  function openArchitectureModal(projectId?: string): void {
+    if (!archDialog) return;
+    const spec = (projectId && projectSpecs[projectId]) ? projectSpecs[projectId] : projectSpecs['proj-03'];
+    currentActiveSpec = spec;
+
+    // Populate modal DOM
+    const titleEl = document.getElementById('arch-dialog-title');
+    const subtitleEl = document.getElementById('arch-modal-subtitle');
+    const catEl = document.getElementById('arch-modal-category');
+    const slaEl = document.getElementById('arch-modal-sla');
+    const latEl = document.getElementById('arch-modal-latency');
+
+    if (titleEl) titleEl.textContent = spec.title;
+    if (subtitleEl) subtitleEl.textContent = spec.subtitle;
+    if (catEl) catEl.textContent = spec.category;
+    if (slaEl) slaEl.textContent = spec.sla;
+    if (latEl) latEl.textContent = spec.latency;
+
+    // Flow steps
+    const f1Name = document.getElementById('arch-flow-ingest');
+    const f1Desc = document.getElementById('arch-flow-ingest-desc');
+    const f2Name = document.getElementById('arch-flow-verify');
+    const f2Desc = document.getElementById('arch-flow-verify-desc');
+    const f3Name = document.getElementById('arch-flow-queue');
+    const f3Desc = document.getElementById('arch-flow-queue-desc');
+    const f4Name = document.getElementById('arch-flow-dispatch');
+    const f4Desc = document.getElementById('arch-flow-dispatch-desc');
+
+    if (f1Name) f1Name.textContent = spec.flow.ingest.name;
+    if (f1Desc) f1Desc.textContent = spec.flow.ingest.desc;
+    if (f2Name) f2Name.textContent = spec.flow.verify.name;
+    if (f2Desc) f2Desc.textContent = spec.flow.verify.desc;
+    if (f3Name) f3Name.textContent = spec.flow.queue.name;
+    if (f3Desc) f3Desc.textContent = spec.flow.queue.desc;
+    if (f4Name) f4Name.textContent = spec.flow.dispatch.name;
+    if (f4Desc) f4Desc.textContent = spec.flow.dispatch.desc;
+
+    // Specs grid
+    const spConc = document.getElementById('arch-spec-concurrency');
+    const spSec = document.getElementById('arch-spec-security');
+    const spStor = document.getElementById('arch-spec-storage');
+    const spRate = document.getElementById('arch-spec-rate');
+
+    if (spConc) spConc.textContent = spec.specs.concurrency;
+    if (spSec) spSec.textContent = spec.specs.security;
+    if (spStor) spStor.textContent = spec.specs.storage;
+    if (spRate) spRate.textContent = spec.specs.rate;
+
+    // Reset copy button label
+    const copyLabel = document.getElementById('copy-arch-label');
+    if (copyLabel) copyLabel.textContent = 'Copy Technical Brief';
+
+    archDialog.showModal();
+  }
+
+  // Bind all Discuss Architecture triggers
+  document.querySelectorAll('.btn-trigger-architecture, .btn-project-architecture').forEach((btn) => {
+    btn.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      const projId = (btn as HTMLElement).getAttribute('data-project-id') || undefined;
+      openArchitectureModal(projId);
+    });
+  });
+
+  // Close Architecture Modal
+  const btnCloseArch = document.getElementById('btn-close-arch');
+  const btnCloseArchDot = document.getElementById('btn-close-arch-dot');
+  [btnCloseArch, btnCloseArchDot].forEach((el) => {
+    el?.addEventListener('click', () => archDialog?.close());
+  });
+
+  // Light dismiss on backdrop click
+  archDialog?.addEventListener('click', (e: MouseEvent) => {
+    if (e.target === archDialog) {
+      archDialog.close();
+    }
+  });
+
+  // "Inquire About This Architecture" inside modal
+  const btnInquireWithSpec = document.getElementById('btn-inquire-with-spec');
+  btnInquireWithSpec?.addEventListener('click', () => {
+    if (!currentActiveSpec) return;
+    archDialog?.close();
+
+    // Attach to contact section
+    const banner = document.getElementById('arch-context-banner');
+    const bannerName = document.getElementById('arch-context-name');
+    if (banner && bannerName) {
+      bannerName.textContent = currentActiveSpec.title;
+      banner.style.display = 'flex';
+    }
+
+    // Set chip
+    const typeChips = document.querySelectorAll('.type-chip');
+    typeChips.forEach((chip) => {
+      const isMatch = chip.getAttribute('data-type') === currentActiveSpec?.systemType;
+      chip.classList.toggle('is-active', isMatch);
+    });
+    const hiddenType = document.getElementById('form-system-type') as HTMLInputElement | null;
+    if (hiddenType && currentActiveSpec) {
+      hiddenType.value = currentActiveSpec.systemType;
+    }
+
+    // Pre-populate message
+    const msgInput = document.getElementById('form-message') as HTMLTextAreaElement | null;
+    if (msgInput) {
+      msgInput.value = `Hi Samyog,\n\nI would like to consult on the architecture and implementation of "${currentActiveSpec.title}".\n\nSpecific requirements:\n- Target Concurrency / Throughput:\n- Integration Scope (APIs / Webhooks / POS):\n- Deployment Timeline:\n\nLooking forward to discussing the technical specification!`;
+    }
+
+    // Smooth scroll to contact
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      const headerOffset = 80;
+      const elPos = contactSection.getBoundingClientRect().top;
+      const targetPos = elPos + window.scrollY - headerOffset;
+      window.scrollTo({ top: targetPos, behavior: 'smooth' });
+
+      // Focus message field
+      setTimeout(() => {
+        msgInput?.focus();
+      }, 600);
+    }
+  });
+
+  // "Copy Technical Brief" inside modal
+  const btnCopyArchSpec = document.getElementById('btn-copy-arch-spec');
+  btnCopyArchSpec?.addEventListener('click', async () => {
+    if (!currentActiveSpec) return;
+    const briefText = `[RaaSki Architecture Spec] ${currentActiveSpec.title}
+Category: ${currentActiveSpec.category}
+SLA Guarantee: ${currentActiveSpec.sla} | ${currentActiveSpec.latency}
+Pipeline Flow:
+1. ${currentActiveSpec.flow.ingest.name} — ${currentActiveSpec.flow.ingest.desc}
+2. ${currentActiveSpec.flow.verify.name} — ${currentActiveSpec.flow.verify.desc}
+3. ${currentActiveSpec.flow.queue.name} — ${currentActiveSpec.flow.queue.desc}
+4. ${currentActiveSpec.flow.dispatch.name} — ${currentActiveSpec.flow.dispatch.desc}
+Engineering Metrics:
+- Concurrency: ${currentActiveSpec.specs.concurrency}
+- Security: ${currentActiveSpec.specs.security}
+- Storage: ${currentActiveSpec.specs.storage}
+- Burst Protection: ${currentActiveSpec.specs.rate}
+Consultation Inquiry: contact@codewithraa.me`;
+
+    try {
+      await navigator.clipboard.writeText(briefText);
+      const copyLabel = document.getElementById('copy-arch-label');
+      if (copyLabel) {
+        copyLabel.textContent = 'Copied to Clipboard!';
+        setTimeout(() => {
+          copyLabel.textContent = 'Copy Technical Brief';
+        }, 2200);
+      }
+    } catch {
+      // Fallback
+    }
+  });
+
+  /* ===================================================================
+     8. QUICK CONNECT MODAL HANDLER
+     =================================================================== */
+  const quickConnectDialog = document.getElementById('quick-connect-dialog') as HTMLDialogElement | null;
+
+  document.querySelectorAll('.btn-trigger-quick-connect').forEach((btn) => {
+    btn.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      quickConnectDialog?.showModal();
+    });
+  });
+
+  const btnCloseConnect = document.getElementById('btn-close-connect');
+  const btnCloseConnectDot = document.getElementById('btn-close-connect-dot');
+  [btnCloseConnect, btnCloseConnectDot].forEach((el) => {
+    el?.addEventListener('click', () => quickConnectDialog?.close());
+  });
+
+  quickConnectDialog?.addEventListener('click', (e: MouseEvent) => {
+    if (e.target === quickConnectDialog) {
+      quickConnectDialog.close();
+    }
+  });
+
+  // Quick Copy Email
+  const btnQuickCopyEmail = document.getElementById('btn-quick-copy-email');
+  btnQuickCopyEmail?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText('contact@codewithraa.me');
+      const label = document.getElementById('label-copy-email');
+      if (label) {
+        label.textContent = 'Copied!';
+        setTimeout(() => { label.textContent = 'Copy Email'; }, 2000);
+      }
+    } catch {}
+  });
+
+  // Quick Copy Discord
+  const btnQuickCopyDiscord = document.getElementById('btn-quick-copy-discord');
+  btnQuickCopyDiscord?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText('RaaSki');
+      const label = document.getElementById('label-copy-discord');
+      if (label) {
+        label.textContent = 'Copied!';
+        setTimeout(() => { label.textContent = 'Copy Handle'; }, 2000);
+      }
+    } catch {}
+  });
+
+  // Jump to form from Quick Connect
+  const btnJumpToForm = document.getElementById('btn-jump-to-form');
+  btnJumpToForm?.addEventListener('click', () => {
+    quickConnectDialog?.close();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      const headerOffset = 80;
+      const elPos = contactSection.getBoundingClientRect().top;
+      window.scrollTo({ top: elPos + window.scrollY - headerOffset, behavior: 'smooth' });
+    }
+  });
+
+  /* ===================================================================
+     9. INTERACTIVE CONTACT FORM WITH CLASSIFICATION CHIPS
+     =================================================================== */
+  // Type chips
+  const typeChips = document.querySelectorAll('.type-chip');
+  const hiddenTypeInput = document.getElementById('form-system-type') as HTMLInputElement | null;
+  typeChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      typeChips.forEach((c) => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      const typeVal = chip.getAttribute('data-type') || 'microservices';
+      if (hiddenTypeInput) hiddenTypeInput.value = typeVal;
+    });
+  });
+
+  // Timeline chips
+  const timelineChips = document.querySelectorAll('.timeline-chip');
+  const hiddenTimelineInput = document.getElementById('form-timeline') as HTMLInputElement | null;
+  timelineChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      timelineChips.forEach((c) => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      const timelineVal = chip.getAttribute('data-timeline') || 'urgent';
+      if (hiddenTimelineInput) hiddenTimelineInput.value = timelineVal;
+    });
+  });
+
+  // Clear attached arch spec button
+  const btnClearArch = document.getElementById('btn-clear-arch');
+  btnClearArch?.addEventListener('click', () => {
+    const banner = document.getElementById('arch-context-banner');
+    if (banner) banner.style.display = 'none';
+    const msgInput = document.getElementById('form-message') as HTMLTextAreaElement | null;
+    if (msgInput) msgInput.value = '';
+  });
+
+  // Contact form submission
   const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
 
   if (contactForm) {
@@ -163,7 +566,10 @@ if (typeof document !== 'undefined') {
       const formData = new FormData(contactForm);
       const name = (formData.get('name') as string || '').trim();
       const email = (formData.get('email') as string || '').trim();
+      const discord = (formData.get('discord_handle') as string || '').trim();
       const message = (formData.get('message') as string || '').trim();
+      const systemType = (formData.get('system_type') as string || 'microservices').toUpperCase();
+      const timeline = (formData.get('timeline') as string || 'urgent').toUpperCase();
 
       // Form validation
       const statusNote = document.getElementById('form-status-note');
@@ -192,7 +598,7 @@ if (typeof document !== 'undefined') {
             <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
             <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
           </svg>
-          <span>Dispatching Message...</span>
+          <span>Dispatching Consultation...</span>
         `;
         submitBtn.disabled = true;
 
@@ -206,14 +612,15 @@ if (typeof document !== 'undefined') {
           submitBtn.classList.add('btn--success');
 
           if (statusNote) {
-            statusNote.textContent = 'Inquiry dispatched successfully! Opening mail client draft...';
+            statusNote.textContent = 'Consultation inquiry dispatched! Launching mail client draft...';
             statusNote.classList.remove('text-error');
             statusNote.classList.add('text-success');
           }
 
           // Trigger mailto with prefilled details
-          const mailSubject = encodeURIComponent(`Automation Project Consultation — ${name}`);
-          const mailBody = encodeURIComponent(`Hi Samyog,\n\nMy name is ${name} (${email}).\n\nProject Scope:\n${message}\n\nLooking forward to hearing from you!`);
+          const mailSubject = encodeURIComponent(`[${systemType} / ${timeline}] Consultation — ${name}`);
+          const discordLine = discord ? `Discord / Org: ${discord}\n` : '';
+          const mailBody = encodeURIComponent(`Hi Samyog,\n\nName: ${name}\nEmail: ${email}\n${discordLine}System Classification: ${systemType}\nEngagement Timeline: ${timeline}\n\nProject Scope & Requirements:\n${message}\n\nLooking forward to your architectural assessment!`);
           window.location.href = `mailto:contact@codewithraa.me?subject=${mailSubject}&body=${mailBody}`;
 
           setTimeout(() => {
@@ -221,8 +628,10 @@ if (typeof document !== 'undefined') {
             submitBtn.disabled = false;
             submitBtn.classList.remove('btn--success');
             contactForm.reset();
+            const banner = document.getElementById('arch-context-banner');
+            if (banner) banner.style.display = 'none';
             if (statusNote) {
-              statusNote.textContent = 'Guaranteed response within 4 hours. Direct Discord escalations prioritized.';
+              statusNote.textContent = 'Guaranteed response within 4 hours. Direct technical triage from Kathmandu, Nepal.';
               statusNote.classList.remove('text-success');
             }
           }, 4500);
@@ -232,7 +641,7 @@ if (typeof document !== 'undefined') {
   }
 
   /* ===================================================================
-     8. SMOOTH SCROLL FOR ANCHOR LINKS
+     10. SMOOTH SCROLL FOR ANCHOR LINKS
      =================================================================== */
   document.querySelectorAll('a[href^="/#"], a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e: Event) => {
@@ -245,7 +654,6 @@ if (typeof document !== 'undefined') {
       const targetId = rawHref.slice(hashIndex);
       if (!targetId || targetId === '#') return;
 
-      // If we are already on homepage, smoothly scroll
       if (window.location.pathname === '/' || window.location.pathname === '') {
         const target = document.querySelector(targetId);
         if (target) {

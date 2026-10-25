@@ -11,61 +11,34 @@ const { hero } = defaultPortfolioData;
 
 const codeTabs = [
   {
-    id: 'discord',
-    filename: 'discord_sentinel.py',
-    tag: 'discord.py v2.3',
-    code: `import asyncio
-import discord
-from discord.ext import commands
-from core.defense import HeuristicEngine, RateLimiter
-
-class DiscordSentinel(commands.Bot):
-    """Production anti-raid & community protection engine."""
-    def __init__(self):
-        intents = discord.Intents.default()
-        intents.members = True
-        intents.message_content = True
-        super().__init__(command_prefix="/", intents=intents)
-        self.heuristics = HeuristicEngine(window=3.0, threshold=12)
-        self.limiter = RateLimiter(capacity=30, refill_rate=10.0)
-
-    async def on_member_join(self, member: discord.Member):
-        if not await self.heuristics.evaluate(member):
-            await member.kick(reason="Anti-raid heuristic quarantine")
-            return
-        await self.assign_default_roles(member)
-
-bot = DiscordSentinel()
-if __name__ == "__main__":
-    bot.run("DISCORD_TOKEN")`
-  },
-  {
     id: 'pos',
     filename: 'pos_inventory_bridge.py',
     tag: 'FastAPI + Celery',
     code: `import hmac, hashlib
 from fastapi import FastAPI, Header, HTTPException
 from core.queues import celery_app
+from core.database import atomic_inventory_lock
 
-app = FastAPI(title="OmniVendor POS Gateway")
+app = FastAPI(title="OmniVendor POS Gateway", version="3.2.0")
 
 @app.post("/webhooks/clover-sync")
 async def sync_pos_transaction(payload: dict, x_signature: str = Header()):
-    # Verify cryptographic HMAC signature from POS hardware
+    # Verify cryptographic HMAC signature from register hardware
     expected = hmac.new(SECRET_KEY, str(payload).encode(), hashlib.sha256).hexdigest()
     if not hmac.compare_digest(expected, x_signature):
-        raise HTTPException(status_code=401, detail="Invalid HMAC token")
+        raise HTTPException(status_code=401, detail="Invalid HMAC signature")
 
-    # Dispatch atomic inventory reconciliation to Celery worker
-    task = celery_app.send_task("reconcile_stock", args=[payload["sku"], -1])
-    return {"status": "ENQUEUED", "task_id": task.id}`
+    # Atomic multi-channel stock lock across physical and digital storefronts
+    async with atomic_inventory_lock(payload["sku"]):
+        task = celery_app.send_task("reconcile_stock", args=[payload["sku"], -1])
+        return {"status": "ENQUEUED", "task_id": task.id, "latency_ms": 14}`
   },
   {
     id: 'stealth',
     filename: 'stealth_session.py',
-    tag: 'Playwright + JA3',
+    tag: 'Playwright + JA4',
     code: `from playwright.async_api import async_playwright
-from core.tls import JA3Profile, ResidentialMesh
+from core.tls import JA4Profile, ResidentialMesh
 
 class StealthEngine:
     """Anti-detection browser cluster evading Turnstile & DataDome."""
@@ -79,10 +52,31 @@ class StealthEngine:
                 proxy={"server": endpoint.url},
                 args=["--disable-blink-features=AutomationControlled"]
             )
-            ctx = await JA3Profile.apply_camoufox(browser)
+            ctx = await JA4Profile.apply_camoufox(browser)
             page = await ctx.new_page()
             await page.goto(target_url, wait_until="networkidle")
             return await page.evaluate("() => window.__APP_DATA__")`
+  },
+  {
+    id: 'gateway',
+    filename: 'event_gateway.py',
+    tag: 'AsyncIO + Token Bucket',
+    code: `import asyncio
+from core.defense import HeuristicEngine, RateLimiter
+from core.audit import WALSnapshotBus
+
+class SystemEventGateway:
+    """High-concurrency microservice event dispatcher & defense engine."""
+    def __init__(self):
+        self.heuristics = HeuristicEngine(window=3.0, threshold=12)
+        self.limiter = RateLimiter(capacity=50, refill_rate=25.0)
+        self.wal_bus = WALSnapshotBus(storage_mode="sqlite_wal")
+
+    async def dispatch_event(self, event_id: str, payload: dict):
+        if not await self.limiter.acquire(tokens=1):
+            await self.wal_bus.record_burst_overflow(event_id)
+            return {"status": "RATE_LIMITED", "retry_after_ms": 18}
+        return await self.heuristics.process_atomic(payload)`
   }
 ];
 ---
@@ -183,40 +177,45 @@ class StealthEngine:
 
   <div class="container hero-container">
     <div class="hero-content">
-      <!-- Exact Requested Badge -->
+      <!-- Senior Backend Architect Badge -->
       <div class="hero-badge anim-badge">
         <span class="hero-badge-dot"></span>
-        <span class="hero-badge-text">SENIOR PYTHON BOT ARCHITECT &amp; OSINT SPECIALIST</span>
+        <span class="hero-badge-text">{hero.badge}</span>
       </div>
 
-      <!-- Exact Requested Headline with Smooth Line Stagger -->
+      <!-- Hero Headline with Smooth Line Stagger -->
       <h1 class="hero-title">
-        <span class="title-line title-line--1">Autonomous Discord bots,</span>
-        <span class="title-line title-line--2">vendor pipelines &amp;</span>
-        <span class="title-line title-line--3 title-accent">Python Swarms</span>
+        <span class="title-line title-line--1">{hero.titleLine1}</span>
+        <span class="title-line title-line--2">{hero.titleLine2}</span>
+        <span class="title-line title-line--3 title-accent">{hero.titleAccent}</span>
       </h1>
 
-      <!-- Exact Requested Subtitle with Smooth Fade -->
+      <!-- Hero Subtitle -->
       <p class="hero-subtitle anim-subtitle">
-        5+ years engineering high-concurrency Discord bot frameworks, commercial vendor POS pipelines, stealth web scraping clusters, and autonomous reconnaissance swarms.
+        {hero.subtitle}
       </p>
 
-      <!-- Action Buttons -->
+      <!-- Upgraded Multi-Action Buttons -->
       <div class="hero-actions anim-actions">
         <a href="#projects" class="btn btn--primary" data-cursor-hover>
-          <span>Explore Projects</span>
+          <span>Explore Systems</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="5" y1="12" x2="19" y2="12" />
             <polyline points="12 5 19 12 12 19" />
           </svg>
         </a>
-        <a href="#contact" class="btn btn--secondary" data-cursor-hover>
-          <span>Discuss Architecture</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-            <polyline points="22,6 12,13 2,6" />
+        <button type="button" class="btn btn--secondary btn-trigger-architecture" data-cursor-hover title="Open Interactive Architectural Blueprint">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
           </svg>
-        </a>
+          <span>Discuss Architecture</span>
+        </button>
+        <button type="button" class="btn-quick-chip btn-trigger-quick-connect" data-cursor-hover title="Direct Channels & Fast Response">
+          <span class="quick-chip-dot"></span>
+          <span>Quick Connect</span>
+        </button>
       </div>
 
       <!-- Grounded Stats Row -->
@@ -566,6 +565,39 @@ class StealthEngine:
   .btn--primary:hover {
     box-shadow: 0 6px 24px rgba(6, 182, 212, 0.5);
     transform: translateY(-2px);
+  }
+
+  .btn-quick-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.28);
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+    font-size: var(--size-xs);
+    font-weight: 700;
+    color: #34D399;
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .btn-quick-chip:hover {
+    background: rgba(16, 185, 129, 0.16);
+    border-color: #10B981;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+    color: #A7F3D0;
+  }
+
+  .quick-chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 8px #10B981;
+    animation: dotPulse 2s infinite alternate;
   }
 
   /* Stats */

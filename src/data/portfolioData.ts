@@ -12,7 +12,7 @@ export interface ProjectItem {
   id: string;
   title: string;
   category: string;
-  filterCategory: 'osint' | 'discord' | 'vendor' | 'scraping';
+  filterCategory: 'osint' | 'backend' | 'vendor' | 'scraping';
   description: string;
   tags: string[];
   liveUrl?: string;
@@ -58,95 +58,89 @@ export interface PortfolioData {
 
 export const defaultPortfolioData: PortfolioData = {
   hero: {
-    badge: 'SENIOR PYTHON BOT ARCHITECT & OSINT SPECIALIST',
-    titleLine1: 'Autonomous Discord bots,',
-    titleLine2: 'vendor pipelines &',
-    titleAccent: 'Python Swarms',
+    badge: 'SENIOR PYTHON BACKEND ARCHITECT & AUTOMATION SPECIALIST',
+    titleLine1: 'High-Throughput Microservices,',
+    titleLine2: 'vendor POS bridges &',
+    titleAccent: 'Autonomous Pipelines',
     subtitle:
-      '5+ years engineering high-concurrency Discord bot frameworks, commercial vendor POS pipelines, stealth web scraping clusters, and autonomous reconnaissance swarms.',
+      '5+ years architecting fault-tolerant Python backends, retail POS integration bridges, stealth data extraction clusters, and high-concurrency automation systems with 99.9% uptime.',
     stats: [
       { number: '172+', label: 'Deployments & Automations' },
-      { number: '5+ Yrs', label: 'Python Engineering' },
-      { number: '99.9%', label: 'Production Reliability' },
-      { number: 'UTC +5:45', label: 'Kathmandu, Nepal' },
+      { number: '5+ Yrs', label: 'Python Systems Architecture' },
+      { number: '45M+', label: 'Monthly Processed Events' },
+      { number: '99.9%', label: 'Production SLA' },
     ],
-    codeFilename: 'discord_sentinel.py',
-    codeSnippet: `import asyncio
-import discord
-from discord.ext import commands
-from core.defense import HeuristicEngine, RateLimiter
+    codeFilename: 'pos_inventory_bridge.py',
+    codeSnippet: `import hmac, hashlib
+from fastapi import FastAPI, Header, HTTPException
+from core.queues import celery_app
+from core.database import atomic_inventory_lock
 
-class DiscordSentinel(commands.Bot):
-    """High-concurrency anti-raid & community security bot."""
-    def __init__(self):
-        intents = discord.Intents.default()
-        intents.members = True
-        intents.message_content = True
-        super().__init__(command_prefix="/", intents=intents)
-        self.heuristics = HeuristicEngine(window_seconds=3.0, threshold=12)
-        self.limiter = RateLimiter(capacity=30, refill_rate=10.0)
+app = FastAPI(title="OmniVendor POS Gateway", version="3.2.0")
 
-    async def on_member_join(self, member: discord.Member):
-        if not await self.heuristics.evaluate_join(member):
-            await member.kick(reason="Automated anti-raid anomaly quarantine")
-            return
-        await self.assign_default_roles(member)
+@app.post("/webhooks/clover-sync")
+async def sync_pos_transaction(payload: dict, x_signature: str = Header()):
+    # Cryptographic HMAC verification from physical store register
+    expected = hmac.new(SECRET_KEY, str(payload).encode(), hashlib.sha256).hexdigest()
+    if not hmac.compare_digest(expected, x_signature):
+        raise HTTPException(status_code=401, detail="Invalid HMAC signature")
 
-bot = DiscordSentinel()
-if __name__ == "__main__":
-    bot.run("DISCORD_TOKEN")`,
-    liveLog: 'Connected to Gateway v10 | 120 shards nominal | Latency: 18ms',
+    # Atomic multi-channel stock lock across physical and digital storefronts
+    async with atomic_inventory_lock(payload["sku"]):
+        task = celery_app.send_task("reconcile_stock", args=[payload["sku"], -1])
+        return {"status": "ENQUEUED", "task_id": task.id, "latency_ms": 14}`,
+    liveLog: 'FastAPI Gateway nominal | Celery queue active | P99 Latency: 22ms',
   },
   about: {
-    sectionTitle: 'Python Bot Architect & Systems Specialist',
+    sectionTitle: 'Python Systems Architect & Automation Specialist',
     sectionSubtitle:
-      '5+ years building production-grade Discord bot frameworks, commercial vendor POS pipelines, and automated intelligence tools.',
+      '5+ years architecting resilient Python backends, high-throughput commercial vendor bridges, and autonomous intelligence systems.',
     bioParagraphs: [
-      "I am Samyog Dhakal (RaaSki), a Python developer based in Kathmandu, Nepal, with over 5 years of focused engineering experience in asynchronous automation, Discord bot infrastructure, and commercial retail integrations.",
-      "Over the past half-decade, I have designed and deployed over 172 custom bot systems and integrations for communities and business clients worldwide. My work ranges from high-concurrency Discord moderation engines protecting servers with 50,000+ members to robust POS bridges that synchronize physical store checkouts with digital inventory and Stripe billing.",
-      "I take pride in writing resilient, clean Python code that operates 24/7 without babysitting—handling rate limits, webhook retries, and network hiccups quietly in the background.",
+      "I am Samyog Dhakal (RaaSki), a Python systems developer based in Kathmandu, Nepal, with over 5 years of focused engineering experience in asynchronous backend architecture, commercial retail integrations, and distributed automation pipelines.",
+      "Over the past half-decade, I have architected and deployed over 172 robust systems for clients across e-commerce, commercial retail, cybersecurity, and community infrastructure. My work centers on high-throughput microservices, sub-second POS inventory synchronization between physical store registers and online channels, and anti-abuse security engines.",
+      "I take pride in writing fault-tolerant, clean Python code that operates 24/7 without intervention—handling concurrency spikes, HMAC signature validations, and distributed task retries quietly in the background.",
     ],
     skillCategories: [
       {
-        id: 'cat-discord-vendor',
-        name: 'Discord & Vendor Systems',
-        skills: [
-          'discord.py / Gateway v10',
-          'Anti-Nuke / Anti-Raid Heuristics',
-          'POS Ingestion (Square, Clover)',
-          'Shopify / WooCommerce Webhooks',
-          'Automated Invoicing & Stripe',
-          'Token Bucket Rate Limiters',
-          'Escrow & Dispute Bots',
-          'Discord Slash Frameworks',
-        ],
-      },
-      {
-        id: 'cat-osint-stealth',
-        name: 'OSINT & Anti-Detection Scraping',
-        skills: [
-          'Playwright & Camoufox',
-          'TLS JA3 / JA4 Fingerprint Spoofing',
-          'Cloudflare Turnstile & DataDome Evasion',
-          'Canvas 2D / WebGL Noise Injection',
-          'Dark-Web & Pastebin Crawlers',
-          'Passive DNS & Entity Resolution',
-          'Residential SOCKS5 Proxy Pools',
-          'Scrapy / BeautifulSoup4',
-        ],
-      },
-      {
         id: 'cat-backend-infra',
-        name: 'Python Ecosystem & Distributed Queues',
+        name: 'Python Backends & Microservices',
         skills: [
           'Python 3.12+ (asyncio)',
           'FastAPI & Async WebSockets',
           'Redis Streams & Pub/Sub',
-          'Celery Distributed Task Queue',
+          'Celery Task Queues',
           'PostgreSQL & SQLite (WAL)',
-          'Docker & Containerized Microservices',
           'HMAC Cryptographic Signing',
-          'Linux Daemons & Systemd',
+          'Docker & Systemd Daemons',
+          'Token Bucket Rate Limiters',
+        ],
+      },
+      {
+        id: 'cat-vendor-pos',
+        name: 'Vendor POS & Retail Commerce',
+        skills: [
+          'POS Ingestion (Square, Clover)',
+          'Multi-Store Inventory Locks',
+          'Shopify / WooCommerce Webhooks',
+          'Automated Invoicing & Stripe',
+          'Crypto Escrow Gateways',
+          'Sub-Second Stock Depletion',
+          'Discord & Slack Webhooks',
+          'PDF Statement Generation',
+        ],
+      },
+      {
+        id: 'cat-osint-stealth',
+        name: 'OSINT Intelligence & Stealth Scraping',
+        skills: [
+          'Playwright & Camoufox',
+          'TLS JA3 / JA4 Spoofing',
+          'Cloudflare Turnstile & DataDome',
+          'Canvas 2D / WebGL Noise',
+          'Dark-Web & Breach Crawlers',
+          'Passive DNS Entity Resolution',
+          'Residential SOCKS5 Proxy Pools',
+          'Automated Abuse Takedowns',
         ],
       },
     ],
@@ -154,12 +148,12 @@ if __name__ == "__main__":
   projects: [
     {
       id: 'proj-01',
-      title: 'Cerberus OSINT — Threat Intelligence & Leak Surveillance Mesh',
+      title: 'Cerberus OSINT — Threat Intelligence & Breach Surveillance Mesh',
       category: 'OSINT, Threat Reconnaissance & Dark-Web Intel',
       filterCategory: 'osint',
       description:
-        'Multi-threaded reconnaissance crawler indexing paste sites, credential breaches, and unauthorized vendor impersonations across Discord and web networks. Alerts within 180ms of leak discovery with automated forensic reporting.',
-      tags: ['Python 3.12', 'asyncio', 'Playwright Headless', 'Redis Streams', 'OSINT Recon', 'Discord Webhooks'],
+        'Multi-threaded reconnaissance crawler indexing paste sites, credential breaches, and unauthorized vendor impersonations across web networks. Alerts within 180ms of leak discovery with automated forensic reporting.',
+      tags: ['Python 3.12', 'asyncio', 'Playwright Headless', 'Redis Streams', 'OSINT Recon', 'Webhook Alerts'],
       liveUrl: '/#projects',
       githubUrl: 'https://github.com/RaaCodesHere',
       previewGradient: 'linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #4338CA 100%)',
@@ -167,12 +161,12 @@ if __name__ == "__main__":
     },
     {
       id: 'proj-02',
-      title: 'Aegis Discord Sentinel — Enterprise Community & Merchant Defense',
-      category: 'Discord Bot Security & Anti-Raid Automation',
-      filterCategory: 'discord',
+      title: 'Aegis Sentinel — Enterprise Community & Merchant Defense Gateway',
+      category: 'High-Concurrency Backend & Anti-Raid Defense',
+      filterCategory: 'backend',
       description:
-        'Military-grade security bot engineered for 100k+ member Discord servers and vendor marketplaces. Features behavioral heuristics for raid interception, instant bot token quarantine, and automated member rollback (1,000+ member recovery in 4s).',
-      tags: ['Python', 'discord.py', 'Redis Pub/Sub', 'Anomaly Heuristics', 'SQLite WAL', 'HMAC Verification'],
+        'Fault-tolerant security gateway engineered for 100k+ member platforms and merchant infrastructure. Features behavioral heuristics for raid interception, instant token quarantine, and automated member rollback (1,000+ member recovery in 4s).',
+      tags: ['Python', 'Async Event Loop', 'Redis Pub/Sub', 'Anomaly Heuristics', 'SQLite WAL', 'HMAC Verification'],
       liveUrl: '/#projects',
       githubUrl: 'https://github.com/RaaCodesHere',
       previewGradient: 'linear-gradient(135deg, #0C4A6E 0%, #0369A1 50%, #0284C7 100%)',
@@ -181,10 +175,10 @@ if __name__ == "__main__":
     {
       id: 'proj-03',
       title: 'OmniVendor Bridge — Real-Life POS & Multi-Channel Vendor Pipeline',
-      category: 'Retail Merchant Automation & Inventory Reconciliation',
+      category: 'Retail POS Automation & Inventory Reconciliation',
       filterCategory: 'vendor',
       description:
-        'High-throughput vendor integration pipeline connecting physical brick-and-mortar POS hardware (Square/Clover) with Shopify, Discord VIP marketplaces, and automated Stripe/crypto settlement webhooks with sub-second stock depletion alerts.',
+        'High-throughput vendor integration pipeline connecting physical brick-and-mortar POS hardware (Square/Clover) with Shopify, multi-channel marketplaces, and automated Stripe/crypto settlement webhooks with sub-second stock depletion alerts.',
       tags: ['Python', 'FastAPI', 'POS Webhook Bridge', 'Celery', 'Stripe API', 'PDF Invoicing'],
       liveUrl: '/#projects',
       githubUrl: 'https://github.com/RaaCodesHere',
@@ -194,7 +188,7 @@ if __name__ == "__main__":
     {
       id: 'proj-04',
       title: 'GhostProxy Stealth Engine — Cloudflare Turnstile & DataDome Evasion',
-      category: 'Advanced Anti-Detection & High-Volume Scraping',
+      category: 'Anti-Detection Browser Clusters & High-Volume Scraping',
       filterCategory: 'scraping',
       description:
         'Autonomous browser crawler framework utilizing fingerprint spoofing (TLS JA3/JA4, Canvas 2D noise, WebGL uniform spoofing) with Celery distributed async queues processing 25M+ requests monthly with 0 bans.',
@@ -206,12 +200,12 @@ if __name__ == "__main__":
     },
     {
       id: 'proj-05',
-      title: 'Discopay Escrow & Commerce Engine — Native In-Discord Storefront',
-      category: 'Discord Commerce & Escrow Automation',
-      filterCategory: 'discord',
+      title: 'Discopay Escrow & Commerce Engine — Multi-Channel Storefront Automation',
+      category: 'Automated Escrow & Commerce Workflows',
+      filterCategory: 'vendor',
       description:
-        'Discord-native vendor bot allowing retail vendors to sell physical & digital stock directly within Discord with instant invoice generation, role provisioning, payment escrow, and dispute arbitration ticketing.',
-      tags: ['Python', 'discord.py', 'Stripe Webhooks', 'Crypto Escrow', 'PostgreSQL', 'Ticket Dispatcher'],
+        'Custom commerce gateway allowing vendors to sell physical & digital stock seamlessly with instant invoice generation, role provisioning, payment escrow, and dispute arbitration ticketing.',
+      tags: ['Python', 'FastAPI', 'Stripe Webhooks', 'Crypto Escrow', 'PostgreSQL', 'Ticket Dispatcher'],
       liveUrl: '/#projects',
       githubUrl: 'https://github.com/RaaCodesHere',
       previewGradient: 'linear-gradient(135deg, #831843 0%, #9D174D 50%, #BE185D 100%)',
@@ -219,11 +213,11 @@ if __name__ == "__main__":
     },
     {
       id: 'proj-06',
-      title: 'SpecterWatch — Vendor Brand Protection & Rogue Clone Takedown',
-      category: 'Brand Protection, Anti-Phishing & OSINT',
+      title: 'SpecterWatch — Brand Protection & Rogue Clone Surveillance',
+      category: 'Automated Brand Protection & Reconnaissance',
       filterCategory: 'osint',
       description:
-        'Automated surveillance crawler identifying typosquatted vendor domains, counterfeit listings, and fake Discord servers impersonating official vendors, instantly generating automated takedown dossiers.',
+        'Automated surveillance crawler identifying typosquatted vendor domains, counterfeit listings, and fake community portals impersonating official vendors, instantly generating automated takedown dossiers.',
       tags: ['Python', 'Scrapy', 'BeautifulSoup4', 'WHOIS OSINT', 'ReportLab PDF', 'Takedown Alerts'],
       liveUrl: '/#projects',
       githubUrl: 'https://github.com/RaaCodesHere',
