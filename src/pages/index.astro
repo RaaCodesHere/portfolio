@@ -9,7 +9,6 @@ import ProjectIndex from '../components/ProjectIndex.astro';
 import VendorSolutions from '../components/VendorSolutions.astro';
 import ContactSection from '../components/ContactSection.astro';
 import ArchitectureModal from '../components/ArchitectureModal.astro';
-import QuickConnectModal from '../components/QuickConnectModal.astro';
 
 export const prerender = true;
 ---
@@ -27,10 +26,9 @@ export const prerender = true;
   <!-- Vendor & Systems Solutions: enterprise capabilities matrix replacing resume timeline -->
   <VendorSolutions />
 
-  <!-- Contact: direct consultation form, Discord & verified contact portals -->
+  <!-- Contact: direct message form, Discord & verified contact portals -->
   <ContactSection />
 
   <!-- Interactive Modal Overlays -->
   <ArchitectureModal />
-  <QuickConnectModal />
 </BaseLayout>

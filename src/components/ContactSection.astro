@@ -10,12 +10,11 @@
     <div class="contact-header reveal">
       <div class="section-tag-badge">
         <span class="tag-badge-dot"></span>
-        <span>GET IN TOUCH &bull; CONSULTATION</span>
+        <span>GET IN TOUCH</span>
       </div>
-      <h2 class="section-title">Architect Your Systems &amp; Pipelines</h2>
+      <h2 class="section-title">Let's Build Something Great</h2>
       <p class="section-subtitle">
-        Have a specialized Python backend, vendor POS integration, or stealth data extraction
-        project? Drop your specifications below for a prompt architectural assessment.
+        Have a project in mind, need custom backend infrastructure, or want to discuss technical systems? Drop a message below and I'll get back to you.
       </p>
     </div>
 
@@ -40,13 +39,14 @@
         <div class="contact-detail">
           <div class="contact-detail-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
           </div>
           <div>
-            <p class="contact-detail-label">Location &amp; Availability</p>
-            <p class="contact-detail-value">Kathmandu, Nepal (UTC +5:45) &bull; Worldwide Remote</p>
+            <p class="contact-detail-label">Availability</p>
+            <p class="contact-detail-value">Worldwide Remote</p>
           </div>
         </div>
 
@@ -78,38 +78,13 @@
 
       <!-- Contact form -->
       <form class="contact-form reveal" id="contact-form" style="--delay: 150ms;" novalidate>
-        <!-- Architecture Consultation Context Banner (populated when user clicks "Discuss Architecture") -->
+        <!-- Architecture Context Banner (populated when user clicks "Discuss Architecture") -->
         <div class="arch-context-banner" id="arch-context-banner" style="display: none;">
           <div class="arch-context-left">
-            <span class="arch-context-badge">ARCH SPEC</span>
+            <span class="arch-context-badge">PROJECT ARCHITECTURE</span>
             <span class="arch-context-name" id="arch-context-name">OmniVendor POS Gateway</span>
           </div>
-          <button type="button" class="btn-clear-arch" id="btn-clear-arch" title="Clear attached architecture spec">✕</button>
-        </div>
-
-        <!-- Interactive System Classification Chips -->
-        <div class="form-chips-section">
-          <label class="chips-label">Target System / Classification</label>
-          <div class="chips-row" role="radiogroup" aria-label="System Classification">
-            <button type="button" class="type-chip is-active" data-type="microservices">Microservices &amp; Backends</button>
-            <button type="button" class="type-chip" data-type="pos">Vendor POS Integration</button>
-            <button type="button" class="type-chip" data-type="osint">OSINT Threat Intel</button>
-            <button type="button" class="type-chip" data-type="stealth">Stealth Scraping</button>
-            <button type="button" class="type-chip" data-type="audit">Security &amp; SLA Audit</button>
-          </div>
-          <input type="hidden" name="system_type" id="form-system-type" value="microservices" />
-        </div>
-
-        <!-- Interactive Urgency / Engagement Selector -->
-        <div class="form-chips-section">
-          <label class="chips-label">Engagement Timeline</label>
-          <div class="chips-row" role="radiogroup" aria-label="Engagement Timeline">
-            <button type="button" class="timeline-chip is-active" data-timeline="urgent">Immediate (&lt; 1 Wk)</button>
-            <button type="button" class="timeline-chip" data-timeline="sprint">Sprint (1 &ndash; 2 Wks)</button>
-            <button type="button" class="timeline-chip" data-timeline="roadmap">Milestone (1 Mo+)</button>
-            <button type="button" class="timeline-chip" data-timeline="retainer">Dedicated Retainer</button>
-          </div>
-          <input type="hidden" name="timeline" id="form-timeline" value="urgent" />
+          <button type="button" class="btn-clear-arch" id="btn-clear-arch" title="Clear attached architecture reference">✕</button>
         </div>
 
         <div class="form-group">
@@ -149,7 +124,7 @@
             placeholder=" "
             autocomplete="off"
           />
-          <label for="form-discord" class="form-label">Discord Handle or Organization (Optional)</label>
+          <label for="form-discord" class="form-label">Discord Handle (Optional)</label>
           <div class="form-highlight"></div>
         </div>
 
@@ -160,14 +135,14 @@
             class="form-input form-textarea"
             placeholder=" "
             required
-            rows="4"
+            rows="5"
           ></textarea>
-          <label for="form-message" class="form-label">System Architecture Requirements &amp; Target Scope</label>
+          <label for="form-message" class="form-label">Your Message or Project Details</label>
           <div class="form-highlight"></div>
         </div>
 
         <button type="submit" class="btn btn--primary btn--full" data-cursor-hover>
-          <span>Dispatch Consultation Inquiry</span>
+          <span>Send Message</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="22" y1="2" x2="11" y2="13" />
             <polygon points="22 2 15 22 11 13 2 9 22 2" />
@@ -175,7 +150,7 @@
         </button>
 
         <p class="form-note" id="form-status-note">
-          Guaranteed response within 4 hours. Direct technical triage from Kathmandu, Nepal.
+          Guaranteed response within 4 hours.
         </p>
       </form>
     </div>

@@ -65,9 +65,8 @@ export const defaultPortfolioData: PortfolioData = {
     subtitle:
       '5+ years architecting fault-tolerant Python backends, retail POS integration bridges, stealth data extraction clusters, and high-concurrency automation systems with 99.9% uptime.',
     stats: [
-      { number: '172+', label: 'Deployments & Automations' },
-      { number: '5+ Yrs', label: 'Python Systems Architecture' },
-      { number: '45M+', label: 'Monthly Processed Events' },
+      { number: '5+ Yrs', label: 'Python Systems' },
+      { number: '170+', label: 'Deployments Delivered' },
       { number: '99.9%', label: 'Production SLA' },
     ],
     codeFilename: 'pos_inventory_bridge.py',
@@ -96,8 +95,8 @@ async def sync_pos_transaction(payload: dict, x_signature: str = Header()):
     sectionSubtitle:
       '5+ years architecting resilient Python backends, high-throughput commercial vendor bridges, and autonomous intelligence systems.',
     bioParagraphs: [
-      "I am Samyog Dhakal (RaaSki), a Python systems developer based in Kathmandu, Nepal, with over 5 years of focused engineering experience in asynchronous backend architecture, commercial retail integrations, and distributed automation pipelines.",
-      "Over the past half-decade, I have architected and deployed over 172 robust systems for clients across e-commerce, commercial retail, cybersecurity, and community infrastructure. My work centers on high-throughput microservices, sub-second POS inventory synchronization between physical store registers and online channels, and anti-abuse security engines.",
+      "I am Samyog Dhakal (RaaSki), a Python systems developer with over 5 years of focused engineering experience in asynchronous backend architecture, commercial retail integrations, and distributed automation pipelines.",
+      "Over the past half-decade, I have architected and deployed over 170 robust systems for clients across e-commerce, commercial retail, cybersecurity, and community infrastructure. My work centers on high-throughput microservices, sub-second POS inventory synchronization between physical store registers and online channels, and anti-abuse security engines.",
       "I take pride in writing fault-tolerant, clean Python code that operates 24/7 without intervention—handling concurrency spikes, HMAC signature validations, and distributed task retries quietly in the background.",
     ],
     skillCategories: [
@@ -227,7 +226,7 @@ async def sync_pos_transaction(payload: dict, x_signature: str = Header()):
   ],
   contact: {
     email: 'contact@codewithraa.me',
-    location: 'Kathmandu, Nepal (UTC +5:45) • Worldwide Remote',
+    location: 'Worldwide Remote',
     socials: {
       github: 'https://github.com/RaaCodesHere',
       linkedin: 'https://www.linkedin.com/in/samyog-dhakal/',

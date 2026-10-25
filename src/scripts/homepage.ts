@@ -442,7 +442,7 @@ Engineering Metrics:
 - Security: ${currentActiveSpec.specs.security}
 - Storage: ${currentActiveSpec.specs.storage}
 - Burst Protection: ${currentActiveSpec.specs.rate}
-Consultation Inquiry: contact@codewithraa.me`;
+Project Inquiry: contact@codewithraa.me`;
 
     try {
       await navigator.clipboard.writeText(briefText);
@@ -459,94 +459,8 @@ Consultation Inquiry: contact@codewithraa.me`;
   });
 
   /* ===================================================================
-     8. QUICK CONNECT MODAL HANDLER
+     8. CONTACT FORM SUBMISSION
      =================================================================== */
-  const quickConnectDialog = document.getElementById('quick-connect-dialog') as HTMLDialogElement | null;
-
-  document.querySelectorAll('.btn-trigger-quick-connect').forEach((btn) => {
-    btn.addEventListener('click', (e: Event) => {
-      e.preventDefault();
-      quickConnectDialog?.showModal();
-    });
-  });
-
-  const btnCloseConnect = document.getElementById('btn-close-connect');
-  const btnCloseConnectDot = document.getElementById('btn-close-connect-dot');
-  [btnCloseConnect, btnCloseConnectDot].forEach((el) => {
-    el?.addEventListener('click', () => quickConnectDialog?.close());
-  });
-
-  quickConnectDialog?.addEventListener('click', (e: MouseEvent) => {
-    if (e.target === quickConnectDialog) {
-      quickConnectDialog.close();
-    }
-  });
-
-  // Quick Copy Email
-  const btnQuickCopyEmail = document.getElementById('btn-quick-copy-email');
-  btnQuickCopyEmail?.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText('contact@codewithraa.me');
-      const label = document.getElementById('label-copy-email');
-      if (label) {
-        label.textContent = 'Copied!';
-        setTimeout(() => { label.textContent = 'Copy Email'; }, 2000);
-      }
-    } catch {}
-  });
-
-  // Quick Copy Discord
-  const btnQuickCopyDiscord = document.getElementById('btn-quick-copy-discord');
-  btnQuickCopyDiscord?.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText('RaaSki');
-      const label = document.getElementById('label-copy-discord');
-      if (label) {
-        label.textContent = 'Copied!';
-        setTimeout(() => { label.textContent = 'Copy Handle'; }, 2000);
-      }
-    } catch {}
-  });
-
-  // Jump to form from Quick Connect
-  const btnJumpToForm = document.getElementById('btn-jump-to-form');
-  btnJumpToForm?.addEventListener('click', () => {
-    quickConnectDialog?.close();
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      const headerOffset = 80;
-      const elPos = contactSection.getBoundingClientRect().top;
-      window.scrollTo({ top: elPos + window.scrollY - headerOffset, behavior: 'smooth' });
-    }
-  });
-
-  /* ===================================================================
-     9. INTERACTIVE CONTACT FORM WITH CLASSIFICATION CHIPS
-     =================================================================== */
-  // Type chips
-  const typeChips = document.querySelectorAll('.type-chip');
-  const hiddenTypeInput = document.getElementById('form-system-type') as HTMLInputElement | null;
-  typeChips.forEach((chip) => {
-    chip.addEventListener('click', () => {
-      typeChips.forEach((c) => c.classList.remove('is-active'));
-      chip.classList.add('is-active');
-      const typeVal = chip.getAttribute('data-type') || 'microservices';
-      if (hiddenTypeInput) hiddenTypeInput.value = typeVal;
-    });
-  });
-
-  // Timeline chips
-  const timelineChips = document.querySelectorAll('.timeline-chip');
-  const hiddenTimelineInput = document.getElementById('form-timeline') as HTMLInputElement | null;
-  timelineChips.forEach((chip) => {
-    chip.addEventListener('click', () => {
-      timelineChips.forEach((c) => c.classList.remove('is-active'));
-      chip.classList.add('is-active');
-      const timelineVal = chip.getAttribute('data-timeline') || 'urgent';
-      if (hiddenTimelineInput) hiddenTimelineInput.value = timelineVal;
-    });
-  });
-
   // Clear attached arch spec button
   const btnClearArch = document.getElementById('btn-clear-arch');
   btnClearArch?.addEventListener('click', () => {
@@ -568,8 +482,6 @@ Consultation Inquiry: contact@codewithraa.me`;
       const email = (formData.get('email') as string || '').trim();
       const discord = (formData.get('discord_handle') as string || '').trim();
       const message = (formData.get('message') as string || '').trim();
-      const systemType = (formData.get('system_type') as string || 'microservices').toUpperCase();
-      const timeline = (formData.get('timeline') as string || 'urgent').toUpperCase();
 
       // Form validation
       const statusNote = document.getElementById('form-status-note');
@@ -598,7 +510,7 @@ Consultation Inquiry: contact@codewithraa.me`;
             <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
             <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
           </svg>
-          <span>Dispatching Consultation...</span>
+          <span>Sending Message...</span>
         `;
         submitBtn.disabled = true;
 
@@ -607,20 +519,20 @@ Consultation Inquiry: contact@codewithraa.me`;
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            <span>Delivered &bull; Opening Client</span>
+            <span>Message Sent!</span>
           `;
           submitBtn.classList.add('btn--success');
 
           if (statusNote) {
-            statusNote.textContent = 'Consultation inquiry dispatched! Launching mail client draft...';
+            statusNote.textContent = 'Message prepared! Opening your mail client...';
             statusNote.classList.remove('text-error');
             statusNote.classList.add('text-success');
           }
 
           // Trigger mailto with prefilled details
-          const mailSubject = encodeURIComponent(`[${systemType} / ${timeline}] Consultation — ${name}`);
-          const discordLine = discord ? `Discord / Org: ${discord}\n` : '';
-          const mailBody = encodeURIComponent(`Hi Samyog,\n\nName: ${name}\nEmail: ${email}\n${discordLine}System Classification: ${systemType}\nEngagement Timeline: ${timeline}\n\nProject Scope & Requirements:\n${message}\n\nLooking forward to your architectural assessment!`);
+          const mailSubject = encodeURIComponent(`Project Inquiry — ${name}`);
+          const discordLine = discord ? `Discord / Handle: ${discord}\n` : '';
+          const mailBody = encodeURIComponent(`Hi Samyog,\n\nName: ${name}\nEmail: ${email}\n${discordLine}\nMessage:\n${message}\n\nBest regards,\n${name}`);
           window.location.href = `mailto:contact@codewithraa.me?subject=${mailSubject}&body=${mailBody}`;
 
           setTimeout(() => {
@@ -631,7 +543,7 @@ Consultation Inquiry: contact@codewithraa.me`;
             const banner = document.getElementById('arch-context-banner');
             if (banner) banner.style.display = 'none';
             if (statusNote) {
-              statusNote.textContent = 'Guaranteed response within 4 hours. Direct technical triage from Kathmandu, Nepal.';
+              statusNote.textContent = 'Guaranteed response within 4 hours.';
               statusNote.classList.remove('text-success');
             }
           }, 4500);
