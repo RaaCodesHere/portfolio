@@ -6,7 +6,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 export const prerender = true;
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="404: Node Not Found | RaaSki"
+  description="The autonomous cluster node or resource URL you attempted to reach does not exist or has been relocated."
+  canonicalPath="/404"
+>
   <section class="error-page section" aria-label="Page Not Found">
     <div class="container error-container">
       <div class="error-visual reveal">

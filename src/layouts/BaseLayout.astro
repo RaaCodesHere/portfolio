@@ -1,18 +1,102 @@
 ---
 /* RaaSki — base layout.
    Imports the global design system, Google Fonts, custom SVG favicon,
-   renders the shared shell: cursor, header, main, footer. */
+   renders the shared shell: cursor, header, main, footer.
+   Dynamic SEO metadata: titles, descriptions, canonical URLs, OpenGraph, Twitter Cards, and Schema.org JSON-LD. */
 import '../styles/global.css';
 import PortfolioHeader from '../components/PortfolioHeader.astro';
 import PortfolioFooter from '../components/PortfolioFooter.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'profile' | 'article';
+}
+
+const {
+  title = 'Samyog Dhakal (RaaSki) — Python Developer & Automation Specialist',
+  description = 'Portfolio of Samyog Dhakal (RaaSki). Python developer specializing in resilient backends, custom Discord bot automation, retail POS webhooks, and data pipelines.',
+  canonicalPath = Astro.url.pathname,
+  ogImage = '/images/og-preview.jpg',
+  ogType = 'website',
+} = Astro.props;
+
+const siteUrl = 'https://codewithraa.me';
+const normalizedPath = canonicalPath === '/' ? '' : canonicalPath.replace(/\/$/, '');
+const canonicalUrl = `${siteUrl}${normalizedPath}`;
+const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      'url': siteUrl,
+      'name': 'RaaSki — Python Developer & Automation Systems',
+      'description': description,
+      'publisher': {
+        '@id': `${siteUrl}/#person`
+      },
+      'inLanguage': 'en-US'
+    },
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl}/#person`,
+      'name': 'Samyog Dhakal',
+      'alternateName': ['RaaSki', 'RaaCodesHere'],
+      'jobTitle': 'Python Developer & Automation Specialist',
+      'url': siteUrl,
+      'image': `${siteUrl}/images/cat-avatar.jpg`,
+      'sameAs': [
+        'https://github.com/RaaCodesHere',
+        'https://www.linkedin.com/in/samyog-dhakal/',
+        'https://discord.com/users/1105760622462914623'
+      ],
+      'knowsAbout': [
+        'Python',
+        'FastAPI',
+        'Celery',
+        'AsyncIO',
+        'Discord Bots',
+        'Point of Sale Integrations',
+        'Web Scraping & Anti-Detection',
+        'Redis Streams',
+        'PostgreSQL'
+      ]
+    }
+  ]
+};
 ---
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="RaaSki — Senior Python Backend Architect & Automation Specialist. High-throughput microservices, retail vendor POS integration bridges, stealth data extraction clusters, and autonomous bot systems." />
-    <title>RaaSki — Senior Python Backend Architect & Automation Specialist</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={absoluteOgImage} />
+    <meta property="og:site_name" content="RaaSki" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOgImage} />
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <!-- Custom animated cyber shield SVG favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

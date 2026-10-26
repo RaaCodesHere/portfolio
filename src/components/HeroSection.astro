@@ -91,11 +91,10 @@ class SystemEventGateway:
     <!-- Animated Data Flow SVG Network with Flowing Light Beams -->
     <svg class="bot-network-svg" viewBox="0 0 1400 900" fill="none" preserveAspectRatio="xMidYMid slice">
       <defs>
-        <!-- Particle & Path Glow Filter -->
-        <filter id="lightGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+        <!-- Particle & Path Glow Filter (Hardware-friendly for mobile/Android GPUs) -->
+        <filter id="lightGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur" />
           <feMerge>
-            <feMergeNode in="blur" />
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
@@ -338,6 +337,10 @@ class SystemEventGateway:
     padding-top: calc(var(--header-height, 84px) + 2.5rem);
     padding-bottom: var(--space-16);
     overflow: hidden;
+    overflow: clip;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .hero-bg {
@@ -345,6 +348,8 @@ class SystemEventGateway:
     inset: 0;
     pointer-events: none;
     z-index: 0;
+    overflow: hidden;
+    contain: strict;
   }
 
   .hero-gradient {
@@ -379,6 +384,8 @@ class SystemEventGateway:
     height: 100%;
     opacity: 0.65;
     pointer-events: none;
+    contain: strict;
+    transform: translateZ(0);
   }
 
   /* Floating Ambient Glow Orbs */
@@ -388,6 +395,8 @@ class SystemEventGateway:
     filter: blur(80px);
     opacity: 0.45;
     animation: floatOrb 12s ease-in-out infinite alternate;
+    contain: strict;
+    transform: translateZ(0);
   }
 
   .hero-orb--cyan {
@@ -420,13 +429,13 @@ class SystemEventGateway:
 
   @keyframes floatOrb {
     0% {
-      transform: translate(0, 0) scale(1);
+      transform: translate3d(0, 0, 0) scale(1);
     }
     50% {
-      transform: translate(25px, -20px) scale(1.08);
+      transform: translate3d(25px, -20px, 0) scale(1.08);
     }
     100% {
-      transform: translate(-20px, 20px) scale(0.95);
+      transform: translate3d(-20px, 20px, 0) scale(0.95);
     }
   }
 
@@ -434,9 +443,12 @@ class SystemEventGateway:
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: 1.12fr 1fr;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
     gap: var(--space-12);
     align-items: center;
+    width: 100%;
+    max-width: var(--max-width);
+    box-sizing: border-box;
   }
 
   /* ---------- Left Column Content ---------- */
@@ -444,6 +456,9 @@ class SystemEventGateway:
     display: flex;
     flex-direction: column;
     gap: var(--space-6);
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
   }
 
   /* Badge Animation */
@@ -456,6 +471,8 @@ class SystemEventGateway:
     border: 1px solid rgba(6, 182, 212, 0.3);
     border-radius: var(--radius-full);
     width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .anim-badge {
@@ -468,6 +485,7 @@ class SystemEventGateway:
     border-radius: 50%;
     background: #06B6D4;
     box-shadow: 0 0 8px #06B6D4;
+    flex-shrink: 0;
   }
 
   .hero-badge-text {
@@ -476,6 +494,7 @@ class SystemEventGateway:
     font-weight: 700;
     color: #38BDF8;
     letter-spacing: 0.04em;
+    word-break: break-word;
   }
 
   /* Headline & Staggered Text Reveal */
@@ -488,6 +507,8 @@ class SystemEventGateway:
     display: flex;
     flex-direction: column;
     gap: 4px;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .title-line {
@@ -525,6 +546,7 @@ class SystemEventGateway:
     max-width: 54ch;
     margin: 0;
     opacity: 0;
+    word-break: break-word;
   }
 
   .anim-subtitle {
@@ -564,6 +586,8 @@ class SystemEventGateway:
     border-top: 1px solid rgba(255, 255, 255, 0.07);
     margin-top: var(--space-2);
     opacity: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .anim-stats {
@@ -601,6 +625,9 @@ class SystemEventGateway:
     position: relative;
     opacity: 0;
     animation: heroSlideUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
   }
 
   .architecture-code-card {
@@ -611,6 +638,10 @@ class SystemEventGateway:
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55), 0 0 24px rgba(6, 182, 212, 0.15);
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .card-tabs-header {
@@ -621,6 +652,9 @@ class SystemEventGateway:
     background: rgba(11, 15, 25, 0.95);
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     gap: 8px;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .window-controls {
@@ -645,6 +679,9 @@ class SystemEventGateway:
     gap: 4px;
     overflow-x: auto;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    min-width: 0;
+    flex: 1 1 auto;
   }
 
   .code-file-tabs::-webkit-scrollbar {
@@ -663,6 +700,7 @@ class SystemEventGateway:
     cursor: pointer;
     white-space: nowrap;
     transition: all var(--duration-fast) ease;
+    flex-shrink: 0;
   }
 
   .tab-pill-btn:hover {
@@ -702,11 +740,17 @@ class SystemEventGateway:
   .code-panes-body {
     background: #090D16;
     min-height: 290px;
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
   }
 
   .code-pane {
     display: none;
     padding: 14px 16px;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .code-pane.is-active {
@@ -723,6 +767,8 @@ class SystemEventGateway:
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     font-family: var(--font-mono);
     font-size: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
   .meta-tag {
@@ -741,11 +787,15 @@ class SystemEventGateway:
     line-height: 1.65;
     color: #CBD5E1;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .pane-line {
     display: flex;
     gap: 14px;
+    min-width: 0;
   }
 
   .pane-num {
@@ -754,10 +804,12 @@ class SystemEventGateway:
     font-size: 10px;
     min-width: 18px;
     text-align: right;
+    flex-shrink: 0;
   }
 
   .pane-code {
     white-space: pre;
+    min-width: 0;
   }
 
   /* Card Footer Strip */
@@ -770,6 +822,10 @@ class SystemEventGateway:
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     font-family: var(--font-mono);
     font-size: 10.5px;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 8px;
   }
 
   .footer-status-indicator {
@@ -777,6 +833,7 @@ class SystemEventGateway:
     align-items: center;
     gap: 7px;
     color: #94A3B8;
+    min-width: 0;
   }
 
   .indicator-dot {
@@ -785,18 +842,20 @@ class SystemEventGateway:
     border-radius: 50%;
     background: #10B981;
     box-shadow: 0 0 6px #10B981;
+    flex-shrink: 0;
   }
 
   .footer-lang {
     color: #06B6D4;
     font-weight: 700;
+    flex-shrink: 0;
   }
 
-  /* ---------- Keyframe Animations ---------- */
+  /* ---------- Keyframe Animations (Hardware-accelerated) ---------- */
   @keyframes heroSlideUp {
     0% {
       opacity: 0;
-      transform: translateY(18px);
+      transform: translateY(16px);
     }
     100% {
       opacity: 1;
@@ -807,13 +866,11 @@ class SystemEventGateway:
   @keyframes heroTextReveal {
     0% {
       opacity: 0;
-      transform: translateY(16px);
-      filter: blur(4px);
+      transform: translateY(14px);
     }
     100% {
       opacity: 1;
       transform: translateY(0);
-      filter: blur(0);
     }
   }
 
@@ -844,8 +901,9 @@ class SystemEventGateway:
     }
 
     .hero-container {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--space-10);
+      width: 100%;
     }
 
     .hero-content {
@@ -874,12 +932,52 @@ class SystemEventGateway:
 
   @media (max-width: 640px) {
     .hero {
-      padding-top: calc(var(--header-height, 84px) + 1.5rem);
+      padding-top: calc(var(--header-height, 84px) + 1.25rem);
+      padding-bottom: var(--space-10);
+      min-height: auto;
+    }
+
+    .hero-badge {
+      padding: 5px 12px;
+      gap: 6px;
+      max-width: 100%;
+    }
+
+    .hero-badge-text {
+      font-size: 10px;
+      letter-spacing: 0.02em;
+      line-height: 1.35;
+    }
+
+    .hero-title {
+      font-size: clamp(1.85rem, 7vw, 2.35rem);
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: var(--size-body);
+      line-height: 1.55;
+    }
+
+    .hero-actions {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .hero-actions .btn {
+      width: 100%;
+      max-width: 280px;
     }
 
     .hero-stats {
-      flex-wrap: wrap;
-      gap: var(--space-4);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+      width: 100%;
+      max-width: 100%;
+      padding-top: var(--space-4);
+      justify-items: center;
+      text-align: center;
     }
 
     .hero-stat-divider {
@@ -887,11 +985,111 @@ class SystemEventGateway:
     }
 
     .hero-stat {
-      min-width: 110px;
+      min-width: 0;
+      align-items: center;
+    }
+
+    .hero-stat-number {
+      font-size: 1.15rem;
+    }
+
+    .hero-stat-label {
+      font-size: 10px;
+      line-height: 1.25;
     }
 
     .card-tabs-header {
-      flex-wrap: wrap;
+      padding: 7px 10px;
+      gap: 6px;
+    }
+
+    .code-file-tabs {
+      min-width: 0;
+      flex: 1 1 auto;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .tab-pill-btn {
+      padding: 3px 8px;
+      font-size: 10px;
+    }
+
+    .btn-copy-code {
+      padding: 4px 7px;
+      font-size: 9.5px;
+    }
+
+    .btn-copy-code span {
+      display: none;
+    }
+
+    .code-pane {
+      padding: 10px 12px;
+    }
+
+    .pane-pre {
+      font-size: 10.5px;
+      line-height: 1.6;
+    }
+
+    .pane-line {
+      gap: 10px;
+    }
+
+    .pane-num {
+      font-size: 9px;
+      min-width: 14px;
+    }
+
+    .card-footer-strip {
+      padding: 6px 10px;
+      font-size: 9.5px;
+    }
+
+    .indicator-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 190px;
+      font-size: 9px;
+    }
+
+    .hero-orb--cyan {
+      top: 5%;
+      right: -15%;
+      width: 220px;
+      height: 220px;
+      filter: blur(50px);
+      opacity: 0.3;
+    }
+
+    .hero-orb--emerald {
+      bottom: 5%;
+      left: -15%;
+      width: 200px;
+      height: 200px;
+      filter: blur(50px);
+      opacity: 0.25;
+    }
+
+    .hero-orb--blue {
+      display: none;
+    }
+
+    .bot-network-svg {
+      opacity: 0.4;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .indicator-text {
+      max-width: 145px;
+    }
+
+    .hero-badge-text {
+      font-size: 9.5px;
     }
   }
 

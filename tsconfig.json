@@ -4,3 +4,6 @@
     "types": ["astro/global-types"]
   }
 }
+
+
+// inside RaaSki folder make a sub folder named projects. Then code all the projects we have listed on the website. Make sure they alll are functional and properly working co-ordinated

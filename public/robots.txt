@@ -1,0 +1,6 @@
+# Robots.txt for https://codewithraa.me
+User-agent: *
+Allow: /
+
+# Sitemap Index location
+Sitemap: https://codewithraa.me/sitemap-index.xml
